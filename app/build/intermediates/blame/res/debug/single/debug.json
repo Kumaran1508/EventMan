@@ -152,6 +152,10 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\bug_report_icon.png"
     },
     {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_recycler.xml.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\item_recycler.xml"
+    },
+    {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_3.png.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\icon_3.png"
     },

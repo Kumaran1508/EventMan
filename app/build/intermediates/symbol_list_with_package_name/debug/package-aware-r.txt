@@ -1417,6 +1417,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable search_ico
+drawable selection_band_overlay
 drawable settings_icon
 drawable temp_logo
 drawable test_custom_background
@@ -1507,7 +1508,6 @@ id beginning
 id blocking
 id bottom
 id bottom_nav
-id bottom_section
 id bug_report
 id button1
 id button2
@@ -1627,6 +1627,8 @@ id imageview7
 id img1
 id img2
 id img3
+id imgRecyclerView
+id imgitem
 id info
 id italic
 id item_touch_helper_previous_elevation
@@ -1963,6 +1965,7 @@ layout gallery_image
 layout gallery_row
 layout help
 layout home
+layout item_recycler
 layout list_element
 layout login
 layout main

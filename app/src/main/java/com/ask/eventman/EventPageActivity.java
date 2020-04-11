@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.app.*;
+import android.database.Cursor;
 import android.os.*;
+import android.provider.OpenableColumns;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
@@ -51,6 +53,7 @@ import com.google.firebase.database.ChildEventListener;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -94,6 +97,7 @@ public class EventPageActivity extends AppCompatActivity {
 	private ArrayList<HashMap<String, Object>> maplist = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> joined_list = new ArrayList<>();
 	private ArrayList<Uri> _filePath = new ArrayList<>();
+	private ArrayList<Uri> imgs = new ArrayList<>();
 	
 	private LinearLayout eventpage_container;
 	private LinearLayout top_section;
@@ -116,6 +120,7 @@ public class EventPageActivity extends AppCompatActivity {
 
 	private RecyclerView recyclerView;
 	RecyclerView.LayoutManager layoutManager;
+	private RecyclerViewAdapter2 recyclerViewAdapter;
 
 	private ImageView evt_logo;
 
@@ -180,7 +185,7 @@ public class EventPageActivity extends AppCompatActivity {
 		eventpage_container = (LinearLayout) findViewById(R.id.eventpage_container);
 		top_section = (LinearLayout) findViewById(R.id.top_section);
 		middle_section = (LinearLayout) findViewById(R.id.middle_section);
-		bottom_section = (LinearLayout) findViewById(R.id.bottom_section);
+		//bottom_section = (LinearLayout) findViewById(R.id.bottom_section);
 		evt_logo = (ImageView) findViewById(R.id.evt_logo);
 		title = (TextView) findViewById(R.id.title);
 		linear5 = (LinearLayout) findViewById(R.id.linear5);
@@ -215,9 +220,13 @@ public class EventPageActivity extends AppCompatActivity {
 		nav_btn= (Button) findViewById(R.id.nav_btn);
 		img_picker.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 		dbauth = FirebaseAuth.getInstance();
+
 		recyclerView=(RecyclerView) findViewById(R.id.imgRecyclerView);
 		layoutManager = new GridLayoutManager(this,3);
 		recyclerView.setLayoutManager(layoutManager);
+		recyclerViewAdapter = new RecyclerViewAdapter2(imgs);
+		recyclerView.setAdapter(recyclerViewAdapter);
+		recyclerView.setHasFixedSize(true);
 		
 		join_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -403,7 +412,30 @@ public class EventPageActivity extends AppCompatActivity {
 				
 			}
 		};
+
+		storageRef.child("events/").listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+			@Override
+			public void onSuccess(ListResult listResult) {
+				for (StorageReference item : listResult.getItems()) {
+					// All the items under listRef.
+					item.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+						@Override
+						public void onSuccess(Uri uri) {
+							Toast.makeText(EventPageActivity.this, "loading "+uri.toString(), Toast.LENGTH_SHORT).show();
+							imgs.add(uri);
+						}
+					});
+				}
+				recyclerViewAdapter = new RecyclerViewAdapter2(imgs);
+				recyclerView.setAdapter(recyclerViewAdapter);
+			}
+		});
 	}
+
+
+
+
+
 	private void initializeLogic() {
 		try{
 			title.setText(getIntent().getStringExtra("Title"));
@@ -473,10 +505,10 @@ public class EventPageActivity extends AppCompatActivity {
 		for (Uri f:_filePath) {
 			//Uri file = Uri.fromFile(new File(f));
             String filename=f.getLastPathSegment();
-			StorageReference riversRef = storageRef.child("events/"+f.getLastPathSegment() );
+			StorageReference riversRef = storageRef.child("events/"+getFileName(f) );
 			UploadTask uploadTask = riversRef.putFile(f);
 
-            Toast.makeText(this, "uploading"+f.getLastPathSegment(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "uploading"+getFileName(f), Toast.LENGTH_SHORT).show();
 
 			// Register observers to listen for when the download is done or if it fails
 			uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -494,6 +526,28 @@ public class EventPageActivity extends AppCompatActivity {
 				}
 			});
 		}
+	}
+
+	public String getFileName(Uri uri) {
+		String result = null;
+		if (uri.getScheme().equals("content")) {
+			Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+			try {
+				if (cursor != null && cursor.moveToFirst()) {
+					result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+				}
+			} finally {
+				cursor.close();
+			}
+		}
+		if (result == null) {
+			result = uri.getPath();
+			int cut = result.lastIndexOf('/');
+			if (cut != -1) {
+				result = result.substring(cut + 1);
+			}
+		}
+		return result;
 	}
 	
 	@Override
