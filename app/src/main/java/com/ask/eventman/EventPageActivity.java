@@ -224,7 +224,7 @@ public class EventPageActivity extends AppCompatActivity {
 		recyclerView=(RecyclerView) findViewById(R.id.imgRecyclerView);
 		layoutManager = new GridLayoutManager(this,3);
 		recyclerView.setLayoutManager(layoutManager);
-		recyclerViewAdapter = new RecyclerViewAdapter2(imgs);
+		recyclerViewAdapter = new RecyclerViewAdapter2(imgs,EventPageActivity.this);
 		recyclerView.setAdapter(recyclerViewAdapter);
 		recyclerView.setHasFixedSize(true);
 		
@@ -421,13 +421,13 @@ public class EventPageActivity extends AppCompatActivity {
 					item.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 						@Override
 						public void onSuccess(Uri uri) {
-							Toast.makeText(EventPageActivity.this, "loading "+uri.toString(), Toast.LENGTH_SHORT).show();
+							//Toast.makeText(EventPageActivity.this, "loading "+uri.toString(), Toast.LENGTH_SHORT).show();
 							imgs.add(uri);
+							recyclerViewAdapter = new RecyclerViewAdapter2(imgs,EventPageActivity.this);
+							recyclerView.setAdapter(recyclerViewAdapter);
 						}
 					});
 				}
-				recyclerViewAdapter = new RecyclerViewAdapter2(imgs);
-				recyclerView.setAdapter(recyclerViewAdapter);
 			}
 		});
 	}
@@ -508,7 +508,7 @@ public class EventPageActivity extends AppCompatActivity {
 			StorageReference riversRef = storageRef.child("events/"+getFileName(f) );
 			UploadTask uploadTask = riversRef.putFile(f);
 
-            Toast.makeText(this, "uploading"+getFileName(f), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "uploading"+getFileName(f), Toast.LENGTH_SHORT).show();
 
 			// Register observers to listen for when the download is done or if it fails
 			uploadTask.addOnFailureListener(new OnFailureListener() {

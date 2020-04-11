@@ -9,6 +9,7 @@ MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\ELCOT\.gradle\caches\t
 MERGED from [com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:17:1-42:12
 MERGED from [com.google.firebase:firebase-database:19.2.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8034dc9f3f5420545158b80dfc317073\firebase-database-19.2.1\AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:17:1-38:12
+MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\c848c62bfcae3f04351f6536eae6ec04\jetified-glide-4.11.0\AndroidManifest.xml:2:1-12:12
 MERGED from [androidx.legacy:legacy-support-v13:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\549430946355f7c167d3dbbf2d095ad4\legacy-support-v13-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:15:1-39:12
 MERGED from [androidx.recyclerview:recyclerview-selection:1.1.0-rc01] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\648689a14e0931534f3a7a42eaf1f0f9\recyclerview-selection-1.1.0-rc01\AndroidManifest.xml:17:1-24:12
@@ -42,6 +43,8 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\ELCOT\.gradle\
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\9e025505c94c04007a8190f74982d1e9\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\e7b316e008973942910afd1c84dc02d7\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\28950d5ca212ff0c86ed1244329056eb\firebase-components-16.0.0\AndroidManifest.xml:15:1-23:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\cc22061029568e927a90b39fd84bc307\jetified-gifdecoder-4.11.0\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\448ad5636d84a77758d1f5390643618a\exifinterface-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\69ad70deb7fc3872e7a51cd7de424a87\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8afb13b33fd0950ef40834a78e555523\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\058a364b06d9011467e5efaaa1ab266f\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
@@ -108,6 +111,8 @@ MERGED from [com.google.firebase:firebase-database:19.2.1] C:\Users\ELCOT\.gradl
 MERGED from [com.google.firebase:firebase-database:19.2.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8034dc9f3f5420545158b80dfc317073\firebase-database-19.2.1\AndroidManifest.xml:28:5-36:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
+MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\c848c62bfcae3f04351f6536eae6ec04\jetified-glide-4.11.0\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\c848c62bfcae3f04351f6536eae6ec04\jetified-glide-4.11.0\AndroidManifest.xml:10:5-20
 MERGED from [com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:29:5-37:19
 MERGED from [com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:29:5-37:19
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\7e11ac1883f9e27592a377296b09eec8\firebase-auth-interop-19.0.0\AndroidManifest.xml:7:5-8:19
@@ -122,6 +127,8 @@ MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\ELCO
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\f720b24cc490c109d50c0a0a1e6bf186\play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.core:core:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\f961a727fd6ff1bec6d760c391cc6822\core-1.1.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\f961a727fd6ff1bec6d760c391cc6822\core-1.1.0\AndroidManifest.xml:24:5-89
+MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\cc22061029568e927a90b39fd84bc307\jetified-gifdecoder-4.11.0\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\cc22061029568e927a90b39fd84bc307\jetified-gifdecoder-4.11.0\AndroidManifest.xml:9:5-20
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\69ad70deb7fc3872e7a51cd7de424a87\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\69ad70deb7fc3872e7a51cd7de424a87\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
 	android:appComponentFactory
@@ -316,6 +323,8 @@ MERGED from [com.google.firebase:firebase-database:19.2.1] C:\Users\ELCOT\.gradl
 MERGED from [com.google.firebase:firebase-database:19.2.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8034dc9f3f5420545158b80dfc317073\firebase-database-19.2.1\AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\c848c62bfcae3f04351f6536eae6ec04\jetified-glide-4.11.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\c848c62bfcae3f04351f6536eae6ec04\jetified-glide-4.11.0\AndroidManifest.xml:6:5-8:41
 MERGED from [androidx.legacy:legacy-support-v13:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\549430946355f7c167d3dbbf2d095ad4\legacy-support-v13-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v13:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\549430946355f7c167d3dbbf2d095ad4\legacy-support-v13-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:20:5-22:41
@@ -382,6 +391,10 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\User
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\e7b316e008973942910afd1c84dc02d7\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\28950d5ca212ff0c86ed1244329056eb\firebase-components-16.0.0\AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\28950d5ca212ff0c86ed1244329056eb\firebase-components-16.0.0\AndroidManifest.xml:19:5-21:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\cc22061029568e927a90b39fd84bc307\jetified-gifdecoder-4.11.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\cc22061029568e927a90b39fd84bc307\jetified-gifdecoder-4.11.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\448ad5636d84a77758d1f5390643618a\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\448ad5636d84a77758d1f5390643618a\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\69ad70deb7fc3872e7a51cd7de424a87\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\69ad70deb7fc3872e7a51cd7de424a87\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8afb13b33fd0950ef40834a78e555523\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44

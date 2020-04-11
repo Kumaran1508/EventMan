@@ -1,6 +1,7 @@
 package com.ask.eventman;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -8,20 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapter2.MyViewHolder> {
 
     ArrayList<Uri> arr;
+    Context context;
 
-    public RecyclerViewAdapter2(ArrayList<Uri> arr) {
+    public RecyclerViewAdapter2(ArrayList<Uri> arr, Context context) {
         this.arr = arr;
+        this.context=context;
     }
 
     @NonNull
@@ -43,8 +50,14 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.imgbtn.setImageURI(arr.get(position));
-        //System.out.println(arr.get(position).toString());
+        Glide.with(context)
+                .load(arr.get(position).toString())
+                .centerCrop()
+                .placeholder(R.drawable.app_icon)
+                .into(holder.imgbtn);
+        //System.out.println();
+        //Toast.makeText(context, ""+arr.get(position).toString(), Toast.LENGTH_SHORT).show();
+        arr.get(position).toString();
     }
 
     @Override
@@ -54,11 +67,12 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageButton imgbtn;
+        public ImageView imgbtn;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgbtn=itemView.findViewById(R.id.imgitem);
+            System.out.println(imgbtn.getId());
 
         }
     }
