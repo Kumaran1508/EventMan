@@ -37,6 +37,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageActivity;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.ClipData;
@@ -55,6 +61,7 @@ public class CreateEventActivity extends AppCompatActivity {
 	public final int REQ_CD_LOGO_PICKER = 101;
 	private Timer _timer = new Timer();
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
+	private Uri icon;
 	
 	private Toolbar _toolbar;
 	private double i = 0;
@@ -173,7 +180,15 @@ public class CreateEventActivity extends AppCompatActivity {
 		evt_logo.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				startActivityForResult(logo_picker, REQ_CD_LOGO_PICKER);
+				//startActivityForResult(logo_picker, REQ_CD_LOGO_PICKER);
+				CropImage.activity()
+						.setGuidelines(CropImageView.Guidelines.ON)
+						.setAspectRatio(1,1)
+						.setActivityTitle("Event Iconss")
+						.setActivityMenuIconColor(R.color.design_default_color_secondary)
+						.setBackgroundColor(R.color.design_default_color_background)
+						.setGuidelinesColor(R.color.design_default_color_background)
+						.start(CreateEventActivity.this);
 			}
 		});
 		
@@ -349,6 +364,7 @@ public class CreateEventActivity extends AppCompatActivity {
 				itnt.putExtra("Start Time", starttime.getText().toString());
 				itnt.putExtra("End Date", enddate.getText().toString());
 				itnt.putExtra("End Time", endtime.getText().toString());
+				itnt.putExtra("icon",icon);
 				itnt.setClass(getApplicationContext(), CreateEvent_2Activity.class);
 				startActivity(itnt);
 			}
@@ -404,31 +420,15 @@ public class CreateEventActivity extends AppCompatActivity {
 	@Override
 	protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
 		super.onActivityResult(_requestCode, _resultCode, _data);
-		
-		switch (_requestCode) {
-			case REQ_CD_LOGO_PICKER:
-			if (_resultCode == Activity.RESULT_OK) {
-				ArrayList<String> _filePath = new ArrayList<>();
-				if (_data != null) {
-					if (_data.getClipData() != null) {
-						for (int _index = 0; _index < _data.getClipData().getItemCount(); _index++) {
-							ClipData.Item _item = _data.getClipData().getItemAt(_index);
-							_filePath.add(FileUtil.convertUriToFilePath(getApplicationContext(), _item.getUri()));
-						}
-					}
-					else {
-						_filePath.add(FileUtil.convertUriToFilePath(getApplicationContext(), _data.getData()));
-					}
-				}
-				evt_logo.setImageBitmap(FileUtil.decodeSampleBitmapFromPath(_filePath.get((int)(0)), 1024, 1024));
-				logopath = _filePath.get((int)(0));
+
+		if(_requestCode==203){
+			CropImage.ActivityResult activityResult=CropImage.getActivityResult(_data);
+			if(_resultCode==RESULT_OK){
+				icon=activityResult.getUri();
+				evt_logo.setImageURI(icon);
+
+
 			}
-			else {
-				
-			}
-			break;
-			default:
-			break;
 		}
 	}
 	

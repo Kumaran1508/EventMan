@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Button;
 
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
@@ -44,12 +45,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import android.view.View;
 import java.text.DecimalFormat;
 
 public class CreateEvent_2Activity extends AppCompatActivity implements OnMapReadyCallback{
 	
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
+	private StorageReference rootref = FirebaseStorage.getInstance().getReference();
 	
 	private Toolbar _toolbar;
 	private HashMap<String, Object> map = new HashMap<>();
@@ -127,6 +133,19 @@ public class CreateEvent_2Activity extends AppCompatActivity implements OnMapRea
 				dbase.child(map.get("key").toString()).updateChildren(map);
 				itnt.setClass(getApplicationContext(), HomeActivity.class);
 				startActivity(itnt);
+				try {
+					StorageReference iconref = rootref.child("events/" + getIntent().getStringExtra("Title") + "/" + "icon.png");
+					iconref.putFile((Uri) getIntent().getExtras().get("icon")).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+						@Override
+						public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+							Toast.makeText(CreateEvent_2Activity.this, "icon Uploaded sucessfully!", Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+				catch (Exception e){
+					Toast.makeText(CreateEvent_2Activity.this, "icon Upload failed : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+				}
+
 				finish();
 			}
 		});

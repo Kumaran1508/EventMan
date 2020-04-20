@@ -227,6 +227,18 @@ public class EventPageActivity extends AppCompatActivity {
 		recyclerViewAdapter = new RecyclerViewAdapter2(imgs,EventPageActivity.this);
 		recyclerView.setAdapter(recyclerViewAdapter);
 		recyclerView.setHasFixedSize(true);
+
+		storageRef.child("events/"+getIntent().getStringExtra("Title")+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+			@Override
+			public void onSuccess(Uri uri) {
+				Glide.with(EventPageActivity.this)
+						.load(uri)
+						.placeholder(R.drawable.app_icon)
+						.into(evt_logo);
+			}
+		});
+
+
 		
 		join_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -413,7 +425,7 @@ public class EventPageActivity extends AppCompatActivity {
 			}
 		};
 
-		storageRef.child("events/").listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+		storageRef.child("events/"+ getIntent().getStringExtra("Title") +"/").listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
 			@Override
 			public void onSuccess(ListResult listResult) {
 				for (StorageReference item : listResult.getItems()) {
@@ -477,6 +489,7 @@ public class EventPageActivity extends AppCompatActivity {
 			case REQ_CD_IMG_PICKER:
 			if (_resultCode == Activity.RESULT_OK) {
 				if (_data != null) {
+					_filePath.clear();
 					if (_data.getClipData() != null) {
 						for (int _index = 0; _index < _data.getClipData().getItemCount(); _index++) {
 						    //_data.getClipData().getItemAt(_index).
@@ -504,8 +517,8 @@ public class EventPageActivity extends AppCompatActivity {
 		}
 		for (Uri f:_filePath) {
 			//Uri file = Uri.fromFile(new File(f));
-            String filename=f.getLastPathSegment();
-			StorageReference riversRef = storageRef.child("events/"+getFileName(f) );
+            //String filename=f.getLastPathSegment();
+			StorageReference riversRef = storageRef.child("events/" + getIntent().getStringExtra("Title") + "/" +getFileName(f) );
 			UploadTask uploadTask = riversRef.putFile(f);
 
             //Toast.makeText(this, "uploading"+getFileName(f), Toast.LENGTH_SHORT).show();

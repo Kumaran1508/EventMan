@@ -72,7 +72,6 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgbtn=itemView.findViewById(R.id.imgitem);
-            System.out.println(imgbtn.getId());
 
         }
     }

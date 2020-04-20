@@ -2,6 +2,9 @@ package com.ask.eventman;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -54,6 +57,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import android.view.View;
@@ -67,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
 	
 	private Timer _timer = new Timer();
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
+	private StorageReference rootref = FirebaseStorage.getInstance().getReference();
 	
 	private Toolbar _toolbar;
 	private FloatingActionButton _fab;
@@ -1029,7 +1036,17 @@ public class HomeActivity extends AppCompatActivity {
 			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
-			event_dp.setImageResource(R.drawable.bg_img_2);
+			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
+			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+				@Override
+				public void onSuccess(Uri uri) {
+					Glide.with(HomeActivity.this)
+							.load(uri)
+							.placeholder(R.drawable.app_icon)
+							.into(event_dp);
+				}
+			});
+
 			imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
@@ -1133,7 +1150,16 @@ public class HomeActivity extends AppCompatActivity {
 			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
-			event_dp.setImageResource(R.drawable.bg_img_2);
+			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
+			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+				@Override
+				public void onSuccess(Uri uri) {
+					Glide.with(HomeActivity.this)
+							.load(uri)
+							.placeholder(R.drawable.app_icon)
+							.into(event_dp);
+				}
+			});
 			imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
@@ -1150,7 +1176,9 @@ public class HomeActivity extends AppCompatActivity {
 	
 	public class Joined_eventsAdapter extends BaseAdapter {
 		ArrayList<HashMap<String, Object>> _data;
+		//Context context;
 		public Joined_eventsAdapter(ArrayList<HashMap<String, Object>> _arr) {
+			//this.context=context;
 			_data = _arr;
 		}
 		
@@ -1185,7 +1213,16 @@ public class HomeActivity extends AppCompatActivity {
 			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
-			event_dp.setImageResource(R.drawable.bg_img_2);
+			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
+			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+				@Override
+				public void onSuccess(Uri uri) {
+					Glide.with(HomeActivity.this)
+							.load(uri)
+							.placeholder(R.drawable.app_icon)
+							.into(event_dp);
+				}
+			});
 			imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
@@ -1237,7 +1274,17 @@ public class HomeActivity extends AppCompatActivity {
 			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
-			event_dp.setImageResource(R.drawable.bg_img_2);
+			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
+			rootref.child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+				@Override
+				public void onSuccess(Uri uri) {
+					Glide.with(HomeActivity.this)
+							.load(uri)
+							.placeholder(R.drawable.app_icon)
+							.into(event_dp);
+				}
+			});
+
 			imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
