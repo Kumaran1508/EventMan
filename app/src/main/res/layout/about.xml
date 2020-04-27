@@ -36,10 +36,10 @@
 				android:textColor="#000000"/>
 			<TextView
 				android:id="@+id/textview3"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:padding="8dp"
-				android:text="For your kind information :\nThis app is completely designed and developed on an Android device. (Android Studio is not used).\n\nSoftware used :\nSketchware"
+				android:text="\n\nSoftware used :\nAndroid Studio"
 				android:textSize="14sp"
 				android:textColor="#000000"
 				android:layout_weight="3"/>

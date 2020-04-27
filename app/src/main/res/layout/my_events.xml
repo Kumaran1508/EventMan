@@ -153,6 +153,5 @@
 		android:layout_height="match_parent"
 		android:layout_gravity="start"
 		android:background="#EEEEEE">
-		<include	layout="@layout/_drawer_my_events"/>
 	</LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

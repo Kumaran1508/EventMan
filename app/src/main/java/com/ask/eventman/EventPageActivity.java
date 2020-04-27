@@ -57,6 +57,8 @@ import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -159,6 +161,7 @@ public class EventPageActivity extends AppCompatActivity {
 		}
 		else {
 			initializeLogic();
+			createNotificationChannel();
 		}
 	}
 
@@ -250,6 +253,15 @@ public class EventPageActivity extends AppCompatActivity {
 					joined.child(mapJoined.get("key").toString()).updateChildren(mapJoined);
 					join_btn.setText("JOINED");
 					join_btn.setTextColor(0xFF00C853);
+
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(EventPageActivity.this,"1")
+                            .setSmallIcon(R.drawable.bg_img_2)
+                            .setContentTitle("Test Notification")
+                            .setContentText("You have joined "+getIntent().getStringExtra("Title"))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+					NotificationManagerCompat notificationManager = NotificationManagerCompat.from(EventPageActivity.this);
+					notificationManager.notify(25,builder.build());
 				}
 				else {
 					if (true) {
@@ -445,7 +457,14 @@ public class EventPageActivity extends AppCompatActivity {
 	}
 
 
-
+    private void createNotificationChannel(){
+	    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+	        NotificationChannel notificationChannel = new NotificationChannel("1","notificationchannel",NotificationManager.IMPORTANCE_DEFAULT);
+	        notificationChannel.setDescription("Ithu thaan description");
+	        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+	        notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
 
 
 	private void initializeLogic() {
@@ -475,7 +494,7 @@ public class EventPageActivity extends AppCompatActivity {
 			}
 		}
 		catch(Exception e){
-			SketchwareUtil.showMessage(getApplicationContext(), "");
+			SketchwareUtil.showMessage(getApplicationContext(), "Error : "+e.getMessage());
 		}
 	}
 
@@ -495,7 +514,7 @@ public class EventPageActivity extends AppCompatActivity {
 						    //_data.getClipData().getItemAt(_index).
 							ClipData.Item _item = _data.getClipData().getItemAt(_index);
 							_filePath.add(_item.getUri());
-							Toast.makeText(EventPageActivity.this, "for loop part executes : "+_item.getUri().toString(), Toast.LENGTH_LONG).show();
+							//Toast.makeText(EventPageActivity.this, "for loop part executes : "+_item.getUri().toString(), Toast.LENGTH_LONG).show();
 						}
 					}
 					else {
@@ -571,75 +590,7 @@ public class EventPageActivity extends AppCompatActivity {
 		android.graphics.drawable.GradientDrawable gd = new android.graphics.drawable.GradientDrawable(); gd.setColor(Color.parseColor(_color)); gd.setCornerRadius((int)_radius); _view.setBackground(gd); try { if(Build.VERSION.SDK_INT >= 21) { _view.setElevation((int)_shadow); } } catch (Exception e) {}
 	}
 
-	
-	
-	/*public class Listview1Adapter extends BaseAdapter {
-		ArrayList<HashMap<String, Object>> _data;
-		public Listview1Adapter(ArrayList<HashMap<String, Object>> _arr) {
-			_data = _arr;
-		}
-		
-		@Override
-		public int getCount() {
-			return _data.size();
-		}
-		
-		@Override
-		public HashMap<String, Object> getItem(int _index) {
-			return _data.get(_index);
-		}
-		
-		@Override
-		public long getItemId(int _index) {
-			return _index;
-		}
-		@Override
-		public View getView(final int _position, View _view, ViewGroup _viewGroup) {
-			LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _v = _view;
-			if (_v == null) {
-				_v = _inflater.inflate(R.layout.gallery_row, null);
-			}
-			
-			final LinearLayout gallery_row = (LinearLayout) _v.findViewById(R.id.gallery_row);
-			final LinearLayout linear2 = (LinearLayout) _v.findViewById(R.id.linear2);
-			final LinearLayout linear3 = (LinearLayout) _v.findViewById(R.id.linear3);
-			final LinearLayout linear4 = (LinearLayout) _v.findViewById(R.id.linear4);
-			final ImageView img1 = (ImageView) _v.findViewById(R.id.img1);
-			final ImageView img2 = (ImageView) _v.findViewById(R.id.img2);
-			final ImageView img3 = (ImageView) _v.findViewById(R.id.img3);
-			
-			Glide.with(getApplicationContext()).load(Uri.parse(Images.get((int)_position).get("image1").toString())).into(img1);
-			Glide.with(getApplicationContext()).load(Uri.parse(Images.get((int)_position).get("image2").toString())).into(img2);
-			Glide.with(getApplicationContext()).load(Uri.parse(Images.get((int)_position).get("image3").toString())).into(img3);
-			img1.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View _view) {
-					itnt.putExtra("img", Images.get((int)_position).get("image1").toString());
-					itnt.setClass(getApplicationContext(), GalleryImageActivity.class);
-					startActivity(itnt);
-				}
-			});
-			img2.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View _view) {
-					itnt.putExtra("img", Images.get((int)_position).get("image2").toString());
-					itnt.setClass(getApplicationContext(), GalleryImageActivity.class);
-					startActivity(itnt);
-				}
-			});
-			img3.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View _view) {
-					itnt.putExtra("img", Images.get((int)_position).get("image3").toString());
-					itnt.setClass(getApplicationContext(), GalleryImageActivity.class);
-					startActivity(itnt);
-				}
-			});
-			
-			return _v;
-		}
-	}*/
+
 	
 	@Deprecated
 	public void showMessage(String _s) {

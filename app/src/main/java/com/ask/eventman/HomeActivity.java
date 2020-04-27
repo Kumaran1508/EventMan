@@ -206,7 +206,8 @@ public class HomeActivity extends AppCompatActivity {
 		});
 		_fab = (FloatingActionButton) findViewById(R.id._fab);
 		
-		_drawer = (DrawerLayout) findViewById(R.id._drawer);ActionBarDrawerToggle _toggle = new ActionBarDrawerToggle(HomeActivity.this, _drawer, _toolbar, R.string.app_name, R.string.app_name);
+		_drawer = (DrawerLayout) findViewById(R.id._drawer);
+		ActionBarDrawerToggle _toggle = new ActionBarDrawerToggle(HomeActivity.this, _drawer, _toolbar, R.string.app_name, R.string.app_name);
 		_drawer.addDrawerListener(_toggle);
 		_toggle.syncState();
 		
@@ -1033,9 +1034,12 @@ public class HomeActivity extends AppCompatActivity {
 			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
 			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
 			final TextView location = (TextView) _v.findViewById(R.id.location);
-			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			final TextView date = (TextView) _v.findViewById(R.id.date);
+			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
+
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
 			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 				@Override
@@ -1047,10 +1051,12 @@ public class HomeActivity extends AppCompatActivity {
 				}
 			});
 
-			imageview2.setImageResource(R.drawable.ic_bookmark_black);
+			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
 				location.setText(_data.get((int)_position).get("Owner").toString());
+				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
+				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
 			}
 			catch(Exception e)
 			{
@@ -1095,11 +1101,11 @@ public class HomeActivity extends AppCompatActivity {
 			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
 			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
 			final TextView location = (TextView) _v.findViewById(R.id.location);
-			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
 			event_dp.setImageResource(R.drawable.bg_img_2);
-			imageview2.setImageResource(R.drawable.ic_bookmark_black);
+			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
 				location.setText(_data.get((int)_position).get("Type").toString());
@@ -1147,7 +1153,9 @@ public class HomeActivity extends AppCompatActivity {
 			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
 			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
 			final TextView location = (TextView) _v.findViewById(R.id.location);
-			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			final TextView date = (TextView) _v.findViewById(R.id.date);
+			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
@@ -1160,10 +1168,12 @@ public class HomeActivity extends AppCompatActivity {
 							.into(event_dp);
 				}
 			});
-			imageview2.setImageResource(R.drawable.ic_bookmark_black);
+			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
 				location.setText(_data.get((int)_position).get("Owner").toString());
+				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
+				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
 			}
 			catch(Exception e)
 			{
@@ -1210,7 +1220,9 @@ public class HomeActivity extends AppCompatActivity {
 			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
 			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
 			final TextView location = (TextView) _v.findViewById(R.id.location);
-			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			final TextView date = (TextView) _v.findViewById(R.id.date);
+			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
@@ -1223,10 +1235,13 @@ public class HomeActivity extends AppCompatActivity {
 							.into(event_dp);
 				}
 			});
-			imageview2.setImageResource(R.drawable.ic_bookmark_black);
+			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
 				location.setText(_data.get((int)_position).get("Owner").toString());
+				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
+				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
+
 			}
 			catch(Exception e)
 			{
@@ -1271,7 +1286,9 @@ public class HomeActivity extends AppCompatActivity {
 			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
 			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
 			final TextView location = (TextView) _v.findViewById(R.id.location);
-			final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
+			final TextView date = (TextView) _v.findViewById(R.id.date);
+			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
 			_CardView("#ffffff", 5, 15, elmnt_container);
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
@@ -1285,10 +1302,13 @@ public class HomeActivity extends AppCompatActivity {
 				}
 			});
 
-			imageview2.setImageResource(R.drawable.ic_bookmark_black);
+			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
 				event_title.setText(_data.get((int)_position).get("Title").toString());
 				location.setText(_data.get((int)_position).get("Type").toString());
+				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
+				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
+
 			}
 			catch(Exception e)
 			{

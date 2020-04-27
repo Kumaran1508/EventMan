@@ -34,6 +34,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -97,6 +99,8 @@ public class LoginActivity extends AppCompatActivity {
 	private OnCompleteListener<Void> _dbauth_reset_password_listener;
 	private DatabaseReference dbase = _firebase.getReference("/users");
 	private ChildEventListener _dbase_child_listener;
+	private AlertDialog.Builder dialog;
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -136,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
 		login_mode_text = (TextView) findViewById(R.id.login_mode_text);
 		sign_up = (TextView) findViewById(R.id.sign_up);
 		dbauth = FirebaseAuth.getInstance();
+		dialog = new AlertDialog.Builder(this);
 		
 		login_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -157,26 +162,6 @@ public class LoginActivity extends AppCompatActivity {
 				if (isLogin) {
 					SketchwareUtil.showMessage(getApplicationContext(), "Signing In....  please wait....");
 					dbauth.signInWithEmailAndPassword(uname.getText().toString(), pwd.getText().toString()).addOnCompleteListener(LoginActivity.this, _dbauth_sign_in_listener);
-					timer = new TimerTask() {
-						@Override
-						public void run() {
-							runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									if ((FirebaseAuth.getInstance().getCurrentUser() != null)) {
-										intnt.putExtra("userid", FirebaseAuth.getInstance().getCurrentUser().getEmail());
-										intnt.setClass(getApplicationContext(), HomeActivity.class);
-										startActivity(intnt);
-										finish();
-									}
-									else {
-										SketchwareUtil.showMessage(getApplicationContext(), "Username or password is Invalid");
-									}
-								}
-							});
-						}
-					};
-					_timer.schedule(timer, (int)(3000));
 				}
 				else {
 					if (!password.getText().toString().equals(password_repeat.getText().toString())) {
@@ -393,6 +378,17 @@ public class LoginActivity extends AppCompatActivity {
 			public void onComplete(Task<AuthResult> _param1) {
 				final boolean _success = _param1.isSuccessful();
 				final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
+
+				if ((FirebaseAuth.getInstance().getCurrentUser() != null)) {
+					intnt.putExtra("userid", FirebaseAuth.getInstance().getCurrentUser().getEmail());
+					intnt.setClass(getApplicationContext(), HomeActivity.class);
+					startActivity(intnt);
+					finish();
+				}
+				else {
+					SketchwareUtil.showMessage(getApplicationContext(), "Username or password is Invalid");
+				}
+
 				
 			}
 		};
@@ -421,6 +417,24 @@ public class LoginActivity extends AppCompatActivity {
 		{
 			SketchwareUtil.showMessage(getApplicationContext(), "Not logged in already");
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		dialog.setTitle("Exit");
+		dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface _dialog, int _which) {
+				finish();
+			}
+		});
+		dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface _dialog, int _which) {
+
+			}
+		});
+		dialog.create().show();
 	}
 	
 	@Override

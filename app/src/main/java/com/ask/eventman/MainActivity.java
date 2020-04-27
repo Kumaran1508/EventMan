@@ -26,9 +26,13 @@ import java.util.TimerTask;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
 	
 	private Timer _timer = new Timer();
+	private FirebaseAuth firebaseAuth;
 	
 	private LinearLayout container_main;
 	private ImageView imageview2;
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
-		
+
 		container_main = (LinearLayout) findViewById(R.id.container_main);
 		imageview2 = (ImageView) findViewById(R.id.imageview2);
 		Dialog = new AlertDialog.Builder(this);
@@ -74,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						itnt.setClass(getApplicationContext(), LoginActivity.class);
-						startActivity(itnt);
-						finish();
+                            itnt.setClass(getApplicationContext(), LoginActivity.class);
+                            startActivity(itnt);
+                            finish();
 					}
 				});
 			}
@@ -84,23 +88,7 @@ public class MainActivity extends AppCompatActivity {
 		_timer.schedule(timer, (int)(3000));
 	}
 	
-	@Override
-	public void onBackPressed() {
-		Dialog.setTitle("Exit");
-		Dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
-				finish();
-			}
-		});
-		Dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
-				
-			}
-		});
-		Dialog.create().show();
-	}
+
 	@Deprecated
 	public void showMessage(String _s) {
 		Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_SHORT).show();

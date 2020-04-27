@@ -1589,6 +1589,7 @@ id custom
 id customPanel
 id cut
 id dark
+id date
 id date_of_birth
 id date_picker_actions
 id decor_content_parent
@@ -1738,6 +1739,7 @@ id month_navigation_fragment_toggle
 id month_navigation_next
 id month_navigation_previous
 id month_title
+id mthyr
 id mtrl_calendar_day_selector_frame
 id mtrl_calendar_days_of_week
 id mtrl_calendar_frame

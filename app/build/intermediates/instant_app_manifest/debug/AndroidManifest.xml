@@ -3,7 +3,7 @@
     package="com.ask.eventman"
     android:targetSandboxVersion="2"
     android:versionCode="2"
-    android:versionName="1.1.09" >
+    android:versionName="1.1.23" >
 
     <uses-sdk
         android:minSdkVersion="21"
