@@ -17,12 +17,14 @@
 			android:padding="8dp"
 			android:background="#03A9F4"
 			android:orientation="vertical">
-			<ImageView
+			<de.hdodenhof.circleimageview.CircleImageView
+				xmlns:app="http://schemas.android.com/apk/res-auto"
 				android:id="@+id/user_ico"
 				android:layout_width="70dp"
 				android:layout_height="70dp"
 				android:src="@drawable/def_user"
-				android:scaleType="fitCenter"/>
+				app:civ_border_width="1dp"
+				app:civ_border_color="#FF000000"/>
 			<TextView
 				android:id="@+id/user"
 				android:layout_width="wrap_content"
@@ -38,14 +40,15 @@
 			android:layout_height="50dp"
 			android:padding="5dp"
 			android:gravity="center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:background="@color/colorBackground">
 			<ImageView
 				android:id="@+id/imageview1"
 				android:layout_width="35dp"
 				android:layout_height="35dp"
 				android:layout_marginLeft="10dp"
 				android:src="@drawable/settings_icon"
-				android:scaleType="center"/>
+				android:scaleType="center" />
 			<TextView
 				android:id="@+id/textview1"
 				android:layout_width="wrap_content"
@@ -53,7 +56,7 @@
 				android:padding="8dp"
 				android:text="Settings"
 				android:textSize="14sp"
-				android:textColor="#000000"/>
+				android:textColor="@color/colorText"/>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/feedback"
@@ -61,7 +64,8 @@
 			android:layout_height="50dp"
 			android:padding="5dp"
 			android:gravity="center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:background="@color/colorBackground">
 			<ImageView
 				android:id="@+id/imageview3"
 				android:layout_width="35dp"
@@ -76,7 +80,7 @@
 				android:padding="8dp"
 				android:text="Feedback"
 				android:textSize="14sp"
-				android:textColor="#000000"/>
+				android:textColor="@color/colorText"/>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/bug_report"
@@ -84,14 +88,15 @@
 			android:layout_height="50dp"
 			android:padding="5dp"
 			android:gravity="center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:background="@color/colorBackground">
 			<ImageView
 				android:id="@+id/imageview4"
 				android:layout_width="35dp"
 				android:layout_height="35dp"
 				android:layout_marginLeft="10dp"
 				android:src="@drawable/ic_bug_report_black"
-				android:scaleType="center"/>
+				android:scaleType="centerInside"/>
 			<TextView
 				android:id="@+id/textview2"
 				android:layout_width="wrap_content"
@@ -99,7 +104,7 @@
 				android:padding="8dp"
 				android:text="Bug Report"
 				android:textSize="14sp"
-				android:textColor="#000000"/>
+				android:textColor="@color/colorText"/>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/help"
@@ -107,7 +112,8 @@
 			android:layout_height="50dp"
 			android:padding="5dp"
 			android:gravity="center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:background="@color/colorBackground">
 			<ImageView
 				android:id="@+id/imageview5"
 				android:layout_width="35dp"
@@ -122,7 +128,7 @@
 				android:padding="8dp"
 				android:text="Help"
 				android:textSize="14sp"
-				android:textColor="#000000"/>
+				android:textColor="@color/colorText"/>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/about"
@@ -130,7 +136,8 @@
 			android:layout_height="50dp"
 			android:padding="5dp"
 			android:gravity="center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:background="@color/colorBackground">
 			<ImageView
 				android:id="@+id/imageview2"
 				android:layout_width="35dp"
@@ -145,7 +152,7 @@
 				android:padding="8dp"
 				android:text="About Us"
 				android:textSize="14sp"
-				android:textColor="#000000"/>
+				android:textColor="@color/colorText"/>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/logout"
@@ -153,14 +160,15 @@
 			android:layout_height="50dp"
 			android:padding="5dp"
 			android:gravity="center_vertical"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:background="@color/colorBackground">
 			<ImageView
 				android:id="@+id/imageview6"
 				android:layout_width="35dp"
 				android:layout_height="35dp"
 				android:layout_marginLeft="10dp"
 				android:src="@drawable/ic_launch_black"
-				android:scaleType="center"/>
+				android:scaleType="centerInside"/>
 			<TextView
 				android:id="@+id/textview7"
 				android:layout_width="wrap_content"
@@ -168,7 +176,7 @@
 				android:padding="8dp"
 				android:text="Logout"
 				android:textSize="14sp"
-				android:textColor="#000000"/>
+				android:textColor="@color/colorText"/>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/linear3"
@@ -176,13 +184,14 @@
 			android:layout_height="match_parent"
 			android:padding="5dp"
 			android:gravity="center_horizontal|bottom"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:background="@color/colorBackground">
 			<TextView
 				android:id="@+id/textview6"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:padding="8dp"
-				android:text="v1.1.28"
+				android:text="v1.1.32"
 				android:textSize="12sp"
 				android:textColor="#0288D1"/>
 		</LinearLayout>

@@ -2,7 +2,7 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.ask.eventman"
 4    android:versionCode="2"
-5    android:versionName="1.1.23" >
+5    android:versionName="1.1.32" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
@@ -11,17 +11,17 @@
 9-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:4:2-63
-11-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:4:19-61
+11-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-12-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:5:2-75
-12-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:5:19-73
+12-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:6:5-79
+12-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:6:22-76
 13    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-13-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:6:2-76
-13-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:6:19-74
+13-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:7:5-80
+13-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:7:22-77
 14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-14-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:7:2-77
-14-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:7:19-75
+14-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:8:5-81
+14-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:8:22-78
 15
 16    <uses-feature
 16-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
@@ -31,214 +31,219 @@
 18-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\4e254cb7f308a30966022d28cc45f3ae\play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
 19
 20    <application
-20-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:8:2-92:16
+20-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:10:5-106:19
 21        android:allowBackup="true"
-21-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:9:3-29
+21-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:11:9-35
 22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 22-->[androidx.core:core:1.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\f961a727fd6ff1bec6d760c391cc6822\core-1.1.0\AndroidManifest.xml:24:18-86
 23        android:debuggable="true"
 24        android:icon="@drawable/app_icon"
-24-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:11:3-36
+24-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:12:9-42
 25        android:label="Event Man"
-25-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:10:3-28
+25-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:13:9-34
 26        android:largeHeap="true"
-26-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:12:3-27
-27        android:testOnly="true"
-28        android:theme="@style/AppTheme" >
-28-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:13:3-34
-29        <activity
-29-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:14:3-22:14
-30            android:name="com.ask.eventman.MainActivity"
-30-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:15:4-32
-31            android:configChanges="orientation|screenSize"
-31-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:16:4-50
-32            android:screenOrientation="portrait" >
-32-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:17:4-40
-33            <intent-filter>
-33-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:18:4-21:20
-34                <action android:name="android.intent.action.MAIN" />
-34-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:19:5-56
-34-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:19:13-54
-35
-36                <category android:name="android.intent.category.LAUNCHER" />
-36-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:20:5-64
-36-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:20:15-62
-37            </intent-filter>
-38        </activity>
-39        <activity
-39-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:23:3-26:42
-40            android:name="com.ask.eventman.LoginActivity"
-40-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:24:4-33
-41            android:configChanges="orientation|screenSize"
-41-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:25:4-50
-42            android:screenOrientation="portrait" />
-42-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:26:4-40
-43        <activity
-43-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:27:3-30:42
-44            android:name="com.ask.eventman.HomeActivity"
-44-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:28:4-32
-45            android:configChanges="orientation|screenSize"
-45-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:29:4-50
-46            android:screenOrientation="portrait" />
-46-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:30:4-40
-47        <activity
-47-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:31:3-34:42
-48            android:name="com.ask.eventman.EventPageActivity"
-48-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:32:4-37
-49            android:configChanges="orientation|screenSize"
-49-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:33:4-50
-50            android:screenOrientation="portrait" />
-50-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:34:4-40
-51        <activity
-51-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:35:3-38:42
-52            android:name="com.ask.eventman.CreateEventActivity"
-52-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:36:4-39
-53            android:configChanges="orientation|screenSize"
-53-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:37:4-50
-54            android:screenOrientation="portrait" />
-54-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:38:4-40
-55        <activity
-55-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:39:3-42:42
-56            android:name="com.ask.eventman.CreateEvent_2Activity"
-56-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:40:4-41
-57            android:configChanges="orientation|screenSize"
-57-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:41:4-50
-58            android:screenOrientation="portrait" />
-58-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:42:4-40
-59        <activity
-59-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:43:3-46:42
-60            android:name="com.ask.eventman.GalleryImageActivity"
-60-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:44:4-40
-61            android:configChanges="orientation|screenSize"
-61-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:45:4-50
-62            android:screenOrientation="portrait" />
-62-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:46:4-40
-63        <activity
-63-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:47:3-50:42
-64            android:name="com.ask.eventman.FeedbackActivity"
-64-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:48:4-36
-65            android:configChanges="orientation|screenSize"
-65-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:49:4-50
-66            android:screenOrientation="portrait" />
-66-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:50:4-40
-67        <activity
-67-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:51:3-54:42
-68            android:name="com.ask.eventman.AboutActivity"
-68-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:52:4-33
-69            android:configChanges="orientation|screenSize"
-69-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:53:4-50
-70            android:screenOrientation="portrait" />
-70-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:54:4-40
-71        <activity
-71-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:55:3-58:42
-72            android:name="com.ask.eventman.BugReportActivity"
-72-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:56:4-37
-73            android:configChanges="orientation|screenSize"
-73-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:57:4-50
-74            android:screenOrientation="portrait" />
-74-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:58:4-40
-75        <activity
-75-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:59:3-62:42
-76            android:name="com.ask.eventman.HelpActivity"
-76-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:60:4-32
-77            android:configChanges="orientation|screenSize"
-77-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:61:4-50
-78            android:screenOrientation="portrait" />
-78-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:62:4-40
-79        <activity
-79-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:63:3-64:49
-80            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-80-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:63:13-76
-81            android:theme="@style/Base.Theme.AppCompat" />
-81-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:64:4-47
-82
-83        <meta-data
-83-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:65:3-67:59
-84            android:name="com.google.android.gms.version"
-84-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:66:4-49
-85            android:value="@integer/google_play_services_version" />
-85-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:67:4-57
-86
-87        <provider
-87-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:68:3-72:29
-88            android:name="com.google.firebase.provider.FirebaseInitProvider"
-88-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:69:4-68
-89            android:authorities="com.ask.eventman.firebaseinitprovider"
-89-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:70:4-63
-90            android:exported="false"
-90-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:71:4-28
-91            android:initOrder="100" />
-91-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:72:4-27
-92
-93        <service
-93-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:73:3-85:13
-94            android:name="com.google.firebase.components.ComponentDiscoveryService"
-94-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:74:4-75
-95            android:directBootAware="true"
-95-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\1b23a58bb1c539c2a19df1b0920c32b5\firebase-common-19.3.0\AndroidManifest.xml:34:13-43
-96            android:exported="false" >
-96-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:75:4-28
-97            <meta-data
-97-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:76:4-78:72
-98                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-98-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:77:5-97
-99                android:value="com.google.firebase.components.ComponentRegistrar" />
-99-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:78:5-70
-100            <meta-data
-100-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:79:4-81:72
-101                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-101-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:80:5-97
-102                android:value="com.google.firebase.components.ComponentRegistrar" />
-102-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:81:5-70
-103            <!--
-104                <meta-data
-105                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-106                android:value="com.google.firebase.components.Componentregistrar"/>
-107            -->
-108            <meta-data
-108-->[com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:33:13-35:85
-109                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-109-->[com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:34:17-107
-110                android:value="com.google.firebase.components.ComponentRegistrar" />
-110-->[com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:35:17-82
-111        </service>
-112
-113        <meta-data
-113-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:86:3-88:61
-114            android:name="com.google.android.geo.API_KEY"
-114-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:87:4-49
-115            android:value="AIzaSyBEAylHIXEOoxPuCw2rojobnPJgacVYMpg" />
-115-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:88:4-59
-116
-117        <uses-library
-117-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:89:3-91:30
-118            android:name="org.apache.http.legacy"
-118-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:90:4-41
-119            android:required="false" />
-119-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:91:4-28
-120
-121        <activity
-121-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:24:9-31:50
-122            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-122-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:25:13-85
-123            android:excludeFromRecents="true"
-123-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:26:13-46
-124            android:exported="true"
-124-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:27:13-36
-125            android:launchMode="singleTask"
-125-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:28:13-44
-126            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-126-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:29:13-102
-127            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-127-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:30:13-72
-128        <activity
-128-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
-129            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-129-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:24:13-79
-130            android:exported="false"
-130-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:25:13-37
-131            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-131-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:26:13-72
-132    </application>
-133
-134</manifest>
+26-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:14:9-33
+27        android:theme="@style/AppTheme" >
+27-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:15:9-40
+28        <activity
+28-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:16:9-18:72
+29            android:name="com.ask.eventman.SettingsActivity"
+29-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:17:13-45
+30            android:label="@string/title_activity_settings" />
+30-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:18:13-60
+31        <activity
+31-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:19:9-28:20
+32            android:name="com.ask.eventman.MainActivity"
+32-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:20:13-41
+33            android:configChanges="orientation|screenSize"
+33-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:21:13-59
+34            android:screenOrientation="portrait" >
+34-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:22:13-49
+35            <intent-filter>
+35-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:23:13-27:29
+36                <action android:name="android.intent.action.MAIN" />
+36-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:24:17-69
+36-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:24:25-66
+37
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:26:17-77
+38-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:26:27-74
+39            </intent-filter>
+40        </activity>
+41        <activity
+41-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:29:9-32:52
+42            android:name="com.ask.eventman.LoginActivity"
+42-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:30:13-42
+43            android:configChanges="orientation|screenSize"
+43-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:31:13-59
+44            android:screenOrientation="portrait" />
+44-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:32:13-49
+45        <activity
+45-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:33:9-36:52
+46            android:name="com.ask.eventman.HomeActivity"
+46-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:34:13-41
+47            android:configChanges="orientation|screenSize"
+47-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:35:13-59
+48            android:screenOrientation="portrait" />
+48-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:36:13-49
+49        <activity
+49-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:37:9-40:52
+50            android:name="com.ask.eventman.EventPageActivity"
+50-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:38:13-46
+51            android:configChanges="orientation|screenSize"
+51-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:39:13-59
+52            android:screenOrientation="portrait" />
+52-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:40:13-49
+53        <activity
+53-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:41:9-44:52
+54            android:name="com.ask.eventman.CreateEventActivity"
+54-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:42:13-48
+55            android:configChanges="orientation|screenSize"
+55-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:43:13-59
+56            android:screenOrientation="portrait" />
+56-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:44:13-49
+57        <activity
+57-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:45:9-48:52
+58            android:name="com.ask.eventman.CreateEvent_2Activity"
+58-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:46:13-50
+59            android:configChanges="orientation|screenSize"
+59-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:47:13-59
+60            android:screenOrientation="portrait" />
+60-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:48:13-49
+61        <activity
+61-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:49:9-52:52
+62            android:name="com.ask.eventman.GalleryImageActivity"
+62-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:50:13-49
+63            android:configChanges="orientation|screenSize"
+63-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:51:13-59
+64            android:screenOrientation="portrait" />
+64-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:52:13-49
+65        <activity
+65-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:53:9-56:52
+66            android:name="com.ask.eventman.FeedbackActivity"
+66-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:54:13-45
+67            android:configChanges="orientation|screenSize"
+67-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:55:13-59
+68            android:screenOrientation="portrait" />
+68-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:56:13-49
+69        <activity
+69-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:57:9-60:52
+70            android:name="com.ask.eventman.AboutActivity"
+70-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:58:13-42
+71            android:configChanges="orientation|screenSize"
+71-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:59:13-59
+72            android:screenOrientation="portrait" />
+72-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:60:13-49
+73        <activity
+73-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:61:9-64:52
+74            android:name="com.ask.eventman.BugReportActivity"
+74-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:62:13-46
+75            android:configChanges="orientation|screenSize"
+75-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:63:13-59
+76            android:screenOrientation="portrait" />
+76-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:64:13-49
+77        <activity
+77-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:65:9-68:52
+78            android:name="com.ask.eventman.HelpActivity"
+78-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:66:13-41
+79            android:configChanges="orientation|screenSize"
+79-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:67:13-59
+80            android:screenOrientation="portrait" />
+80-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:68:13-49
+81        <activity
+81-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:69:9-71:59
+82            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+82-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:70:13-76
+83            android:theme="@style/Base.Theme.AppCompat" />
+83-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:71:13-56
+84
+85        <meta-data
+85-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:73:9-75:69
+86            android:name="com.google.android.gms.version"
+86-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:74:13-58
+87            android:value="@integer/google_play_services_version" />
+87-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:75:13-66
+88
+89        <provider
+89-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:77:9-81:39
+90            android:name="com.google.firebase.provider.FirebaseInitProvider"
+90-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:78:13-77
+91            android:authorities="com.ask.eventman.firebaseinitprovider"
+91-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:79:13-72
+92            android:exported="false"
+92-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:80:13-37
+93            android:initOrder="100" />
+93-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:81:13-36
+94
+95        <service
+95-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:83:9-97:19
+96            android:name="com.google.firebase.components.ComponentDiscoveryService"
+96-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:84:13-84
+97            android:directBootAware="true"
+97-->[com.google.firebase:firebase-common:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\1b23a58bb1c539c2a19df1b0920c32b5\firebase-common-19.3.0\AndroidManifest.xml:34:13-43
+98            android:exported="false" >
+98-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:85:13-37
+99            <meta-data
+99-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:86:13-88:85
+100                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+100-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:87:17-109
+101                android:value="com.google.firebase.components.ComponentRegistrar" />
+101-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:88:17-82
+102            <meta-data
+102-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:89:13-91:85
+103                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+103-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:90:17-109
+104                android:value="com.google.firebase.components.ComponentRegistrar" />
+104-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:91:17-82
+105            <!--
+106                <meta-data
+107                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+108                android:value="com.google.firebase.components.Componentregistrar"/>
+109            -->
+110            <meta-data
+110-->[com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:33:13-35:85
+111                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+111-->[com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:34:17-107
+112                android:value="com.google.firebase.components.ComponentRegistrar" />
+112-->[com.google.firebase:firebase-storage:19.1.1] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\8ad4e1ffea3e5c78db0912db37bdac9c\jetified-firebase-storage-19.1.1\AndroidManifest.xml:35:17-82
+113        </service>
+114
+115        <meta-data
+115-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:99:9-101:71
+116            android:name="com.google.android.geo.API_KEY"
+116-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:100:13-58
+117            android:value="AIzaSyBEAylHIXEOoxPuCw2rojobnPJgacVYMpg" />
+117-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:101:13-68
+118
+119        <uses-library
+119-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:103:9-105:40
+120            android:name="org.apache.http.legacy"
+120-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:104:13-50
+121            android:required="false" />
+121-->D:\#Data Files\Event_Man\app\src\main\AndroidManifest.xml:105:13-37
+122
+123        <activity
+123-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:24:9-31:50
+124            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+124-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:25:13-85
+125            android:excludeFromRecents="true"
+125-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:26:13-46
+126            android:exported="true"
+126-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:27:13-36
+127            android:launchMode="singleTask"
+127-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:28:13-44
+128            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+128-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:29:13-102
+129            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+129-->[com.google.firebase:firebase-auth:19.3.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\dfe7b3659c61d92bbc3815d5264c7c0d\firebase-auth-19.3.0\AndroidManifest.xml:30:13-72
+130        <activity
+130-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+131            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+131-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+132            android:exported="false"
+132-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+133            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+133-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\ELCOT\.gradle\caches\transforms-2\files-2.1\d515fa0142795af05e3369fe0848cba8\play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+134    </application>
+135
+136</manifest>

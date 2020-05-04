@@ -20,8 +20,12 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\ic_add_circle_outline_black.png"
     },
     {
-        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout__drawer_my_events.xml.flat",
-        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\_drawer_my_events.xml"
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_home_icon_2_w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\home_icon_2_w.png"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_5w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\icon_5w.png"
     },
     {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_bg_img_4.png.flat",
@@ -32,6 +36,10 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\create_event_2.xml"
     },
     {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\xml_root_preferences.xml.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\xml\\root_preferences.xml"
+    },
+    {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_search_ico.png.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\search_ico.png"
     },
@@ -40,8 +48,16 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\icon_5.png"
     },
     {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_feedback_icon_w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\feedback_icon_w.png"
+    },
+    {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout_event_page.xml.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\event_page.xml"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_2w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\icon_2w.png"
     },
     {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_event_man_title.png.flat",
@@ -96,6 +112,10 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\def_user.png"
     },
     {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_help_icon_w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\help_icon_w.png"
+    },
+    {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout_gallery_row.xml.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\gallery_row.xml"
     },
@@ -104,12 +124,28 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\about.xml"
     },
     {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_bug_report_white.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\ic_bug_report_white.png"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_about_us_w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\about_us_w.png"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout_settings_activity.xml.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\settings_activity.xml"
+    },
+    {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout_login.xml.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\login.xml"
     },
     {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\layout_feedback.xml.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\layout\\feedback.xml"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_settings_icon_w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\settings_icon_w.png"
     },
     {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_temp_logo.png.flat",
@@ -200,8 +236,8 @@
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\login_bg.png"
     },
     {
-        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_home_1.png.flat",
-        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\home_1.png"
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_def_user_w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\def_user_w.png"
     },
     {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_bug_report_black.png.flat",
@@ -210,5 +246,13 @@
     {
         "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_6.png.flat",
         "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\icon_6.png"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launch_white.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\ic_launch_white.png"
+    },
+    {
+        "merged": "D:\\#Data Files\\Event_Man\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_4w.png.flat",
+        "source": "D:\\#Data Files\\Event_Man\\app\\src\\main\\res\\drawable-xhdpi\\icon_4w.png"
     }
 ]

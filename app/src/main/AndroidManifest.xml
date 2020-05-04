@@ -1,93 +1,108 @@
-<manifest
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.ask.eventman">
-	<uses-permission	android:name="android.permission.INTERNET"/>
-	<uses-permission	android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission	android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-	<uses-permission	android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<application
-		android:allowBackup="true"
-		android:label="Event Man"
-		android:icon="@drawable/app_icon"
-		android:largeHeap="true"
-		android:theme="@style/AppTheme">
-		<activity
-			android:name=".MainActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait">
-			<intent-filter>
-				<action	android:name="android.intent.action.MAIN"/>
-				<category	android:name="android.intent.category.LAUNCHER"/>
-			</intent-filter>
-		</activity>
-		<activity
-			android:name=".LoginActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".HomeActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".EventPageActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".CreateEventActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".CreateEvent_2Activity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".GalleryImageActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".FeedbackActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".AboutActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".BugReportActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity
-			android:name=".HelpActivity"
-			android:configChanges="orientation|screenSize"
-			android:screenOrientation="portrait"/>
-		<activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-			android:theme="@style/Base.Theme.AppCompat"/>
-		<meta-data
-			android:name="com.google.android.gms.version"
-			android:value="@integer/google_play_services_version"/>
-		<provider
-			android:name="com.google.firebase.provider.FirebaseInitProvider"
-			android:authorities="com.ask.eventman.firebaseinitprovider"
-			android:exported="false"
-			android:initOrder="100"/>
-		<service
-			android:name="com.google.firebase.components.ComponentDiscoveryService"
-			android:exported="false">
-			<meta-data
-				android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-				android:value="com.google.firebase.components.ComponentRegistrar"/>
-			<meta-data
-				android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-				android:value="com.google.firebase.components.ComponentRegistrar"/>
-            <!--<meta-data
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ask.eventman">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="Event Man"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EventPageActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateEventActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateEvent_2Activity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GalleryImageActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BugReportActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HelpActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="com.ask.eventman.firebaseinitprovider"
+            android:exported="false"
+            android:initOrder="100" />
+
+        <service
+            android:name="com.google.firebase.components.ComponentDiscoveryService"
+            android:exported="false">
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <!--
+                <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-                android:value="com.google.firebase.components.Componentregistrar"/>-->
-		</service>
-		<meta-data
-			android:name="com.google.android.geo.API_KEY"
-			android:value="AIzaSyBEAylHIXEOoxPuCw2rojobnPJgacVYMpg"/>
-		<uses-library
-			android:name="org.apache.http.legacy"
-			android:required="false"/>
-	</application>
+                android:value="com.google.firebase.components.Componentregistrar"/>
+            -->
+        </service>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBEAylHIXEOoxPuCw2rojobnPJgacVYMpg" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
 </manifest>

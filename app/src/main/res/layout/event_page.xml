@@ -21,12 +21,14 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
+		android:background="@color/colorBackground"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<ScrollView
 			android:id="@+id/desc_scroll"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="match_parent"
+			android:background="@color/colorBackground">
 
 			<LinearLayout
 				android:id="@+id/eventpage_container"
@@ -123,14 +125,15 @@
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
 						android:orientation="vertical"
-						android:padding="8dp">
+						android:padding="8dp"
+						android:background="@color/colorBackground">
 						<TextView
 							android:id="@+id/textview3"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:padding="8dp"
 							android:text="Description:"
-							android:textColor="#000000"
+							android:textColor="@color/colorText"
 							android:textSize="12sp" />
 						<TextView
 							android:id="@+id/desc"
@@ -138,7 +141,7 @@
 							android:layout_height="wrap_content"
 							android:padding="8dp"
 							android:text="TextView"
-							android:textColor="#000000"
+							android:textColor="@color/colorText"
 							android:textSize="12sp" />
 						<LinearLayout
 							android:id="@+id/linear6"
@@ -166,7 +169,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="Start Date : "
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 									<TextView
 										android:id="@+id/st_dt"
@@ -174,7 +177,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="TextView"
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 								</LinearLayout>
 								<LinearLayout
@@ -190,7 +193,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="Start Time : "
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 									<TextView
 										android:id="@+id/st_t"
@@ -198,7 +201,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="TextView"
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 								</LinearLayout>
 							</LinearLayout>
@@ -221,7 +224,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="End Date : "
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 									<TextView
 										android:id="@+id/end_dt"
@@ -229,7 +232,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="TextView"
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 								</LinearLayout>
 								<LinearLayout
@@ -245,7 +248,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="End Time : "
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 									<TextView
 										android:id="@+id/end_t"
@@ -253,7 +256,7 @@
 										android:layout_height="wrap_content"
 										android:padding="8dp"
 										android:text="TextView"
-										android:textColor="#000000"
+										android:textColor="@color/colorText"
 										android:textSize="12sp" />
 								</LinearLayout>
 							</LinearLayout>
@@ -278,7 +281,7 @@
 								android:gravity="center_vertical"
 								android:padding="8dp"
 								android:text="Gallery :"
-								android:textColor="#000000"
+								android:textColor="@color/colorText"
 								android:textSize="12sp" />
 							<LinearLayout
 								android:id="@+id/linear17"
@@ -304,7 +307,8 @@
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/imgRecyclerView"
 						android:layout_width="match_parent"
-						android:layout_height="wrap_content">
+						android:layout_height="wrap_content"
+						android:background="@color/colorBackground">
 					</androidx.recyclerview.widget.RecyclerView>
 				</LinearLayout>
 			</LinearLayout>

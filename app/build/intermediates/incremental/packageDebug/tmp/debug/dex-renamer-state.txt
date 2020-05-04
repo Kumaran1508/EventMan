@@ -1,4 +1,4 @@
-#Sun Apr 26 18:51:49 IST 2020
+#Mon May 04 23:10:32 IST 2020
 base.0=D\:\\\#Data Files\\Event_Man\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

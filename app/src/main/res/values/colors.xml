@@ -4,4 +4,6 @@
 	<color	name="colorAccent">#008DCD</color>
 	<color	name="colorControlHighlight">#008DCD</color>
 	<color	name="colorControlNormal">#57BEEE</color>
+	<color name="colorBackground">#ffffff</color>
+	<color name="colorText">#000000</color>
 </resources>

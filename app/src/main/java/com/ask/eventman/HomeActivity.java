@@ -1,14 +1,21 @@
 package com.ask.eventman;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.common.util.Hex;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+
+import android.graphics.drawable.ColorDrawable;
 import android.widget.LinearLayout;
 import android.app.*;
 import android.os.*;
@@ -24,6 +31,8 @@ import android.util.*;
 import android.webkit.*;
 import android.animation.*;
 import android.view.animation.*;
+
+import java.io.File;
 import java.util.*;
 import java.text.*;
 import java.util.HashMap;
@@ -48,6 +57,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,8 +67,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
@@ -68,6 +82,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
 	
@@ -81,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
 	private HashMap<String, Object> map = new HashMap<>();
 	private double i = 0;
 	private String substr = "";
-	private double nav_mem = 0;
+	private int getSelection = 0;
 	private String evt_key = "";
 	private double j = 0;
 	private String username = "";
@@ -133,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
 	private LinearLayout _drawer_about;
 	private LinearLayout _drawer_logout;
 	private LinearLayout _drawer_linear3;
-	private ImageView _drawer_user_ico;
+	private CircleImageView _drawer_user_ico;
 	private TextView _drawer_user;
 	private ImageView _drawer_imageview1;
 	private TextView _drawer_textview1;
@@ -170,20 +186,91 @@ public class HomeActivity extends AppCompatActivity {
 	private Calendar end = Calendar.getInstance();
 	private DatabaseReference dbusers = _firebase.getReference("/users");
 	private ChildEventListener _dbusers_child_listener;
+
+	private int endLimit=7;
+	private boolean isLoaded=Boolean.FALSE,isLoading=Boolean.FALSE;
+	private long evt_count=0;
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.home);
 		com.google.firebase.FirebaseApp.initializeApp(this);
 		initialize(_savedInstanceState);
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
-		|| ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-			ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+
+
+
+
+
+
+	}
+
+	protected void loadEvents(){
+		isLoading=Boolean.TRUE;
+		Query LoadEvents;
+		dbase.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				if(evt_count!=dataSnapshot.getChildrenCount()){
+					isLoaded=Boolean.FALSE;
+				}
+				evt_count = dataSnapshot.getChildrenCount();
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+
+			}
+		});
+		if(isLoaded){
+			isLoading=Boolean.FALSE;
+			return;
+		}
+		if(map_list.size()>=evt_count && map_list.size()>0){
+			isLoading=Boolean.FALSE;
+			return;
+		}
+		else if (map_list.size()>0 && map_list.size()+endLimit<=evt_count){
+			String lastElementKey = map_list.get(map_list.size()-1).get("key").toString();
+			LoadEvents = dbase.orderByKey().startAt(lastElementKey).limitToFirst(endLimit);
+			map_list.remove(map_list.size()-1);
+
+		}
+		else if(map_list.size()>0 && map_list.size()+endLimit>evt_count){
+			String lastElementKey = map_list.get(map_list.size()-1).get("key").toString();
+			LoadEvents = dbase.orderByKey().startAt(lastElementKey);
+			map_list.remove(map_list.size()-1);
+			isLoaded=Boolean.TRUE;
 		}
 		else {
-			initializeLogic();
+			LoadEvents = dbase.orderByKey().limitToFirst(endLimit);
+
 		}
+		LoadEvents.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, Object>> value = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				for (DataSnapshot data:dataSnapshot.getChildren()) {
+					HashMap<String, Object> map = data.getValue(value);
+
+					map_list.add(map);
+				}
+
+
+                event_list.setAdapter(new Event_listAdapter(map_list));
+				isLoading=Boolean.FALSE;
+                ((BaseAdapter)event_list.getAdapter()).notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 	}
+
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -251,7 +338,7 @@ public class HomeActivity extends AppCompatActivity {
 		_drawer_about = (LinearLayout) _nav_view.findViewById(R.id.about);
 		_drawer_logout = (LinearLayout) _nav_view.findViewById(R.id.logout);
 		_drawer_linear3 = (LinearLayout) _nav_view.findViewById(R.id.linear3);
-		_drawer_user_ico = (ImageView) _nav_view.findViewById(R.id.user_ico);
+		_drawer_user_ico = (CircleImageView) _nav_view.findViewById(R.id.user_ico);
 		_drawer_user = (TextView) _nav_view.findViewById(R.id.user);
 		_drawer_imageview1 = (ImageView) _nav_view.findViewById(R.id.imageview1);
 		_drawer_textview1 = (TextView) _nav_view.findViewById(R.id.textview1);
@@ -269,6 +356,69 @@ public class HomeActivity extends AppCompatActivity {
 		dialog = new AlertDialog.Builder(this);
 		dbase_auth = FirebaseAuth.getInstance();
 		net_req = new RequestNetwork(this);
+
+		loadEvents();
+
+		if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+			_drawer_imageview1.setImageDrawable(getDrawable(R.drawable.settings_icon_w));
+			_drawer_imageview3.setImageDrawable(getDrawable(R.drawable.feedback_icon_w));
+			_drawer_imageview4.setImageDrawable(getDrawable(R.drawable.ic_bug_report_white));
+			_drawer_imageview5.setImageDrawable(getDrawable(R.drawable.help_icon_w));
+			_drawer_imageview2.setImageDrawable(getDrawable(R.drawable.about_us_w));
+			_drawer_imageview6.setImageDrawable(getDrawable(R.drawable.ic_launch_white));
+		}
+
+
+		event_list.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				if (view.getLastVisiblePosition() >= map_list.size()-2){
+					//map_list.remove(map_list.size()-1);
+					if(!isLoading){
+						loadEvents();
+					}
+					else{
+						Toast.makeText(HomeActivity.this, "LOADING EVENTS...", Toast.LENGTH_SHORT).show();
+					}
+
+				}
+			}
+		});
+
+
+		try{
+			rootref.child("users/"+FirebaseAuth.getInstance().getCurrentUser().getEmail()+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+				@Override
+				public void onSuccess(Uri uri) {
+					Glide.with(HomeActivity.this)
+							.load(uri)
+							.into(_drawer_user_ico);
+				}
+			});
+		}catch(Exception e){
+			Toast.makeText(HomeActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            _drawer_user_ico.setImageDrawable(getDrawable(R.drawable.def_user));
+		}
+
+		_drawer_user_ico.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CropImage.activity()
+						.setGuidelines(CropImageView.Guidelines.ON)
+						.setAspectRatio(1,1)
+						.setActivityTitle("User Profile")
+						.setActivityMenuIconColor(R.color.design_default_color_secondary)
+						.setBackgroundColor(R.color.design_default_color_background)
+						.setGuidelinesColor(R.color.design_default_color_background)
+						.start(HomeActivity.this);
+			}
+		});
+
 		
 		search_imgbtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -407,48 +557,30 @@ public class HomeActivity extends AppCompatActivity {
 		home_img.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				dbase.addListenerForSingleValueEvent(new ValueEventListener() {
-					@Override
-					public void onDataChange(DataSnapshot _dataSnapshot) {
-						map_list = new ArrayList<>();
-						try {
-							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-								HashMap<String, Object> _map = _data.getValue(_ind);
-								map_list.add(_map);
-							}
-						}
-						catch (Exception _e) {
-							_e.printStackTrace();
-						}
-						try{
-							event_list.setAdapter(new Event_listAdapter(map_list));
-							((BaseAdapter)event_list.getAdapter()).notifyDataSetChanged();
-						}
-						catch(Exception e)
-						{
-							SketchwareUtil.showMessage(getApplicationContext(), "Error Reloading Events");
-						}
-					}
-					@Override
-					public void onCancelled(DatabaseError _databaseError) {
-					}
-				});
+				getSelection=0;
 				home_img.setImageResource(R.drawable.home_icon_1);
 				trending_img.setImageResource(R.drawable.trending_3);
-				live_img.setImageResource(R.drawable.icon_2);
-				joined_img.setImageResource(R.drawable.icon_5);
-				created_img.setImageResource(R.drawable.icon_4);
+				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+					live_img.setImageResource(R.drawable.icon_2w);
+					joined_img.setImageResource(R.drawable.icon_5w);
+					created_img.setImageResource(R.drawable.icon_4w);
+				}
+				else {
+					live_img.setImageResource(R.drawable.icon_2);
+					joined_img.setImageResource(R.drawable.icon_5);
+					created_img.setImageResource(R.drawable.icon_4);
+				}
 				home_frag.setVisibility(View.VISIBLE);
 				setTitle("Home");
 				_fab.setVisibility(View.GONE);
-				nav_mem = 0;
+				getSelection = 0;
 			}
 		});
 		
 		trending_img.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
+				getSelection=1;
 				home_img.setImageResource(R.drawable.home_icon_2);
 				trending_img.setImageResource(R.drawable.trending_2);
 				live_img.setImageResource(R.drawable.icon_2);
@@ -464,11 +596,19 @@ public class HomeActivity extends AppCompatActivity {
 		live_img.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				home_img.setImageResource(R.drawable.home_icon_2);
-				trending_img.setImageResource(R.drawable.trending_3);
+				getSelection=2;
 				live_img.setImageResource(R.drawable.icon_1);
-				joined_img.setImageResource(R.drawable.icon_5);
-				created_img.setImageResource(R.drawable.icon_4);
+				trending_img.setImageResource(R.drawable.trending_3);
+				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+					home_img.setImageResource(R.drawable.home_icon_2_w);
+					joined_img.setImageResource(R.drawable.icon_5w);
+					created_img.setImageResource(R.drawable.icon_4w);
+				}
+				else{
+					home_img.setImageResource(R.drawable.home_icon_2);
+					joined_img.setImageResource(R.drawable.icon_5);
+					created_img.setImageResource(R.drawable.icon_4);
+				}
 				home_frag.setVisibility(View.GONE);
 				trending_frag.setVisibility(View.GONE);
 				live_frag.setVisibility(View.VISIBLE);
@@ -480,11 +620,19 @@ public class HomeActivity extends AppCompatActivity {
 		joined_img.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				home_img.setImageResource(R.drawable.home_icon_2);
-				trending_img.setImageResource(R.drawable.trending_3);
-				live_img.setImageResource(R.drawable.icon_2);
+				getSelection=3;
 				joined_img.setImageResource(R.drawable.icon_6);
-				created_img.setImageResource(R.drawable.icon_4);
+				trending_img.setImageResource(R.drawable.trending_3);
+				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+					home_img.setImageResource(R.drawable.home_icon_2_w);
+					live_img.setImageResource(R.drawable.icon_2w);
+					created_img.setImageResource(R.drawable.icon_4w);
+				}
+				else{
+					home_img.setImageResource(R.drawable.home_icon_2);
+					live_img.setImageResource(R.drawable.icon_2);
+					created_img.setImageResource(R.drawable.icon_4);
+				}
 				home_frag.setVisibility(View.GONE);
 				trending_frag.setVisibility(View.GONE);
 				live_frag.setVisibility(View.GONE);
@@ -497,11 +645,21 @@ public class HomeActivity extends AppCompatActivity {
 		created_img.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				home_img.setImageResource(R.drawable.home_icon_2);
+				getSelection=4;
 				trending_img.setImageResource(R.drawable.trending_3);
-				live_img.setImageResource(R.drawable.icon_2);
-				joined_img.setImageResource(R.drawable.icon_5);
 				created_img.setImageResource(R.drawable.icon_3);
+				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+					home_img.setImageResource(R.drawable.home_icon_2_w);
+					live_img.setImageResource(R.drawable.icon_2w);
+					joined_img.setImageResource(R.drawable.icon_5w);
+
+				}
+				else{
+					home_img.setImageResource(R.drawable.home_icon_2);
+					live_img.setImageResource(R.drawable.icon_2);
+					joined_img.setImageResource(R.drawable.icon_5);
+
+				}
 				home_frag.setVisibility(View.GONE);
 				trending_frag.setVisibility(View.GONE);
 				live_frag.setVisibility(View.GONE);
@@ -521,7 +679,7 @@ public class HomeActivity extends AppCompatActivity {
 			}
 		});
 		
-		_dbase_child_listener = new ChildEventListener() {
+		/*_dbase_child_listener = new ChildEventListener() {
 			@Override
 			public void onChildAdded(DataSnapshot _param1, String _param2) {
 				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
@@ -558,7 +716,7 @@ public class HomeActivity extends AppCompatActivity {
 				
 			}
 		};
-		dbase.addChildEventListener(_dbase_child_listener);
+		dbase.addChildEventListener(_dbase_child_listener);*/
 		
 		_net_req_request_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -696,7 +854,8 @@ public class HomeActivity extends AppCompatActivity {
 		_drawer_settings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				SketchwareUtil.showMessage(getApplicationContext(), "Sorry , settings module is yet to be added.");
+			    itnt.setClass(getApplicationContext(),SettingsActivity.class);
+			    startActivity(itnt);
 			}
 		});
 		
@@ -780,11 +939,19 @@ public class HomeActivity extends AppCompatActivity {
 				
 			}
 		};
+
+
 	}
+
 	private void initializeLogic() {
 		setTitle("Home");
-		_CardView("#ffffff", 1, 10, bottom_nav);
-		_CardView("#f5f5f5", 1, 10, page);
+		_CardView(R.color.colorBackground, 1, 20, bottom_nav);
+		//_CardView(getColor(R.color.colorBackground), 1, 10, page);
+
+
+
+
+
 		_RippleEffect("#2196f3", home_img);
 		_RippleEffect("#2196f3", trending_img);
 		_RippleEffect("#2196f3", live_img);
@@ -793,10 +960,14 @@ public class HomeActivity extends AppCompatActivity {
 		_RippleEffect("#2196f3", search_imgbtn);
 		home_img.setImageResource(R.drawable.home_icon_1);
 		trending_wrapper.setVisibility(View.GONE);
-		dbase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+
+		/*dbase.addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot _dataSnapshot) {
 				map_list = new ArrayList<>();
+
 				try {
 					GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
 					for (DataSnapshot _data : _dataSnapshot.getChildren()) {
@@ -913,25 +1084,83 @@ public class HomeActivity extends AppCompatActivity {
 			@Override
 			public void onCancelled(DatabaseError _databaseError) {
 			}
-		});
+		}); */
 		search_container.setVisibility(View.GONE);
 		_fab.setVisibility(View.GONE);
 	}
-	
+
+
+
 	@Override
 	protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
 		super.onActivityResult(_requestCode, _resultCode, _data);
-		
-		switch (_requestCode) {
-			
-			default:
-			break;
+
+		if(_requestCode==203){
+			CropImage.ActivityResult activityResult=CropImage.getActivityResult(_data);
+			if(_resultCode==RESULT_OK){
+				Uri icon;
+				icon=activityResult.getUri();
+				_drawer_user_ico.setImageURI(icon);
+
+				StorageReference userdp = rootref.child("users/"+FirebaseAuth.getInstance().getCurrentUser().getEmail()+".png");
+				userdp.putFile(icon).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+					@Override
+					public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+						Toast.makeText(HomeActivity.this, "Profile Pic updated :)", Toast.LENGTH_SHORT).show();
+					}
+				});
+
+
+			}
 		}
+
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+			_drawer_imageview1.setImageResource(R.drawable.settings_icon_w);
+			_drawer_imageview3.setImageResource(R.drawable.feedback_icon_w);
+			_drawer_imageview4.setImageResource(R.drawable.ic_bug_report_white);
+			_drawer_imageview5.setImageResource(R.drawable.help_icon_w);
+			_drawer_imageview2.setImageResource(R.drawable.about_us_w);
+			_drawer_imageview6.setImageResource(R.drawable.ic_launch_white);
+			if(getSelection!=0){
+				home_img.setImageResource(R.drawable.home_icon_2_w);
+			}
+			if(getSelection!=2){
+				live_img.setImageResource(R.drawable.icon_2w);
+			}
+			if(getSelection!=3){
+				joined_img.setImageResource(R.drawable.icon_5w);
+			}
+			if(getSelection!=4){
+				created_img.setImageResource(R.drawable.icon_4w);
+			}
+		}
+		else{
+
+			_drawer_imageview1.setImageResource(R.drawable.settings_icon);
+			_drawer_imageview3.setImageResource(R.drawable.feedback_icon);
+			_drawer_imageview4.setImageResource(R.drawable.ic_bug_report_black);
+			_drawer_imageview5.setImageResource(R.drawable.help_icon);
+			_drawer_imageview2.setImageResource(R.drawable.about_us_icon);
+			_drawer_imageview6.setImageResource(R.drawable.ic_launch_black);
+			if(getSelection!=0){
+				home_img.setImageResource(R.drawable.home_icon_2);
+			}
+			if(getSelection!=2){
+				live_img.setImageResource(R.drawable.icon_2);
+			}
+			if(getSelection!=3){
+				joined_img.setImageResource(R.drawable.icon_5);
+			}
+			if(getSelection!=4){
+				created_img.setImageResource(R.drawable.icon_4);
+			}
+		}
 		
 	}
 	
@@ -986,9 +1215,29 @@ public class HomeActivity extends AppCompatActivity {
 			public void onCancelled(DatabaseError _databaseError) {
 			}
 		});
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+        }
+        else {
+            initializeLogic();
+        }
+
 	}
-	private void _CardView (final String _color, final double _radius, final double _shadow, final View _view) {
-		android.graphics.drawable.GradientDrawable gd = new android.graphics.drawable.GradientDrawable(); gd.setColor(Color.parseColor(_color)); gd.setCornerRadius((int)_radius); _view.setBackground(gd); try { if(Build.VERSION.SDK_INT >= 21) { _view.setElevation((int)_shadow); } } catch (Exception e) {}
+
+	private void _CardView (final int _color, final double _radius, final double _shadow, final View _view) {
+		android.graphics.drawable.GradientDrawable gd = new android.graphics.drawable.GradientDrawable();
+		gd.setColor(_color);
+		gd.setCornerRadius((int)_radius);
+		_view.setBackground(gd);
+		try {
+			if(Build.VERSION.SDK_INT >= 21) {
+				_view.setElevation((int)_shadow);
+			}
+		}
+		catch (Exception e) {}
 	}
 	
 	
@@ -1038,18 +1287,21 @@ public class HomeActivity extends AppCompatActivity {
 			final TextView date = (TextView) _v.findViewById(R.id.date);
 			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
-			_CardView("#ffffff", 5, 15, elmnt_container);
+
 
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
-			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-				@Override
-				public void onSuccess(Uri uri) {
-					Glide.with(HomeActivity.this)
-							.load(uri)
-							.placeholder(R.drawable.app_icon)
-							.into(event_dp);
-				}
-			});
+			try {
+				FirebaseStorage.getInstance().getReference().child("events/" + _data.get((int) _position).get("Title").toString() + "/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+					@Override
+					public void onSuccess(Uri uri) {
+						Glide.with(HomeActivity.this)
+								.load(uri)
+								.placeholder(R.drawable.app_icon)
+								.into(event_dp);
+					}
+				});
+			}
+			catch (Exception e){}
 
 			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
@@ -1103,7 +1355,7 @@ public class HomeActivity extends AppCompatActivity {
 			final TextView location = (TextView) _v.findViewById(R.id.location);
 			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
 			
-			_CardView("#ffffff", 5, 15, elmnt_container);
+
 			event_dp.setImageResource(R.drawable.bg_img_2);
 			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
 			try{
@@ -1157,7 +1409,7 @@ public class HomeActivity extends AppCompatActivity {
 			final TextView date = (TextView) _v.findViewById(R.id.date);
 			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
-			_CardView("#ffffff", 5, 15, elmnt_container);
+
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
 			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 				@Override
@@ -1224,7 +1476,7 @@ public class HomeActivity extends AppCompatActivity {
 			final TextView date = (TextView) _v.findViewById(R.id.date);
 			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
-			_CardView("#ffffff", 5, 15, elmnt_container);
+
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
 			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 				@Override
@@ -1290,7 +1542,7 @@ public class HomeActivity extends AppCompatActivity {
 			final TextView date = (TextView) _v.findViewById(R.id.date);
 			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
 			
-			_CardView("#ffffff", 5, 15, elmnt_container);
+
 			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
 			rootref.child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 				@Override

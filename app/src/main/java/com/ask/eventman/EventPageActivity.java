@@ -2,6 +2,7 @@ package com.ask.eventman;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import android.app.*;
 import android.database.Cursor;
@@ -231,6 +232,8 @@ public class EventPageActivity extends AppCompatActivity {
 		recyclerView.setAdapter(recyclerViewAdapter);
 		recyclerView.setHasFixedSize(true);
 
+
+
 		storageRef.child("events/"+getIntent().getStringExtra("Title")+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 			@Override
 			public void onSuccess(Uri uri) {
@@ -262,11 +265,12 @@ public class EventPageActivity extends AppCompatActivity {
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 					NotificationManagerCompat notificationManager = NotificationManagerCompat.from(EventPageActivity.this);
 					notificationManager.notify(25,builder.build());
+
+
 				}
 				else {
-					if (true) {
-						
-					}
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 				}
 			}
 		});

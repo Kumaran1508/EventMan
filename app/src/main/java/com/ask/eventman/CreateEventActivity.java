@@ -184,7 +184,7 @@ public class CreateEventActivity extends AppCompatActivity {
 				CropImage.activity()
 						.setGuidelines(CropImageView.Guidelines.ON)
 						.setAspectRatio(1,1)
-						.setActivityTitle("Event Iconss")
+						.setActivityTitle("Event Icon")
 						.setActivityMenuIconColor(R.color.design_default_color_secondary)
 						.setBackgroundColor(R.color.design_default_color_background)
 						.setGuidelinesColor(R.color.design_default_color_background)
