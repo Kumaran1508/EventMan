@@ -7,28 +7,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.widget.LinearLayout;
-import android.app.*;
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 import android.content.*;
-import android.graphics.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
+
 import java.util.*;
-import java.text.*;
+
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 
 public class MyEventsActivity extends AppCompatActivity {
@@ -103,11 +93,11 @@ public class MyEventsActivity extends AppCompatActivity {
 		home_img.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				home_img.setImageResource(R.drawable.home_icon_1);
+				home_img.setImageResource(R.drawable.home_icon);
 				trending_img.setImageResource(R.drawable.trending_3);
-				live_img.setImageResource(R.drawable.icon_2);
-				joined_img.setImageResource(R.drawable.icon_5);
-				created_img.setImageResource(R.drawable.icon_4);
+				live_img.setImageResource(R.drawable.live_icon);
+				joined_img.setImageResource(R.drawable.joined_icon);
+				created_img.setImageResource(R.drawable.myevents_icon);
 				itnt.setClass(getApplicationContext(), HomeActivity.class);
 				startActivity(itnt);
 			}
@@ -118,9 +108,9 @@ public class MyEventsActivity extends AppCompatActivity {
 			public void onClick(View _view) {
 				home_img.setImageResource(R.drawable.home_icon_2);
 				trending_img.setImageResource(R.drawable.trending_2);
-				live_img.setImageResource(R.drawable.icon_2);
-				joined_img.setImageResource(R.drawable.icon_5);
-				created_img.setImageResource(R.drawable.icon_4);
+				live_img.setImageResource(R.drawable.live_icon);
+				joined_img.setImageResource(R.drawable.joined_icon);
+				created_img.setImageResource(R.drawable.myevents_icon);
 			}
 		});
 		
@@ -130,8 +120,8 @@ public class MyEventsActivity extends AppCompatActivity {
 				home_img.setImageResource(R.drawable.home_icon_2);
 				trending_img.setImageResource(R.drawable.trending_3);
 				live_img.setImageResource(R.drawable.icon_1);
-				joined_img.setImageResource(R.drawable.icon_5);
-				created_img.setImageResource(R.drawable.icon_4);
+				joined_img.setImageResource(R.drawable.joined_icon);
+				created_img.setImageResource(R.drawable.myevents_icon);
 			}
 		});
 		
@@ -140,9 +130,9 @@ public class MyEventsActivity extends AppCompatActivity {
 			public void onClick(View _view) {
 				home_img.setImageResource(R.drawable.home_icon_2);
 				trending_img.setImageResource(R.drawable.trending_3);
-				live_img.setImageResource(R.drawable.icon_2);
+				live_img.setImageResource(R.drawable.live_icon);
 				joined_img.setImageResource(R.drawable.icon_6);
-				created_img.setImageResource(R.drawable.icon_4);
+				created_img.setImageResource(R.drawable.myevents_icon);
 			}
 		});
 		
@@ -164,8 +154,8 @@ public class MyEventsActivity extends AppCompatActivity {
 	private void initializeLogic() {
 		home_img.setImageResource(R.drawable.home_icon_2);
 		trending_img.setImageResource(R.drawable.trending_3);
-		live_img.setImageResource(R.drawable.icon_2);
-		joined_img.setImageResource(R.drawable.icon_5);
+		live_img.setImageResource(R.drawable.live_icon);
+		joined_img.setImageResource(R.drawable.joined_icon);
 		created_img.setImageResource(R.drawable.icon_3);
 	}
 	

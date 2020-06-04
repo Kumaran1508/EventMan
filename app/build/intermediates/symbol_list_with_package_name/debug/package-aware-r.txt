@@ -819,6 +819,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color backgroundinvert
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1477,7 +1478,7 @@ drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable help_icon
 drawable help_icon_w
-drawable home_icon_1
+drawable home_icon
 drawable home_icon_2
 drawable home_icon_2_w
 drawable ic_add_black
@@ -1501,15 +1502,15 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable icon_1
-drawable icon_2
 drawable icon_2w
 drawable icon_3
-drawable icon_4
 drawable icon_4w
-drawable icon_5
 drawable icon_5w
 drawable icon_6
 drawable img
+drawable joined_icon
+drawable listelement_bg
+drawable live_icon
 drawable login_bg
 drawable mtrl_dialog_background
 drawable mtrl_dropdown_arrow
@@ -1520,6 +1521,8 @@ drawable mtrl_ic_error
 drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_dark
 drawable mtrl_tabs_default_indicator
+drawable myevents_icon
+drawable nav_bg
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -1536,6 +1539,7 @@ drawable notify_panel_notification_icon_bg
 drawable preference_list_divider_material
 drawable search_ico
 drawable selection_band_overlay
+drawable selector
 drawable settings_icon
 drawable settings_icon_w
 drawable temp_logo
@@ -1630,6 +1634,7 @@ id auto
 id beginning
 id blocking
 id bottom
+id bottomNavigation
 id bottom_nav
 id bug_report
 id button1
@@ -1733,6 +1738,7 @@ id fitToContents
 id fixed
 id forever
 id fragments_holder
+id frameFragment
 id gallery_row
 id ghost_view
 id ghost_view_holder
@@ -1769,8 +1775,6 @@ id info
 id italic
 id item_touch_helper_previous_elevation
 id join_btn
-id joined_events
-id joined_frag
 id joined_img
 id labeled
 id largeLabel
@@ -1795,12 +1799,12 @@ id linear6
 id linear7
 id linear8
 id linear9
+id linearLayout
 id linear_inside_midscr
 id listMode
 id list_item
 id listview1
-id live_events
-id live_frag
+id live_events_list
 id live_img
 id live_wrapper
 id loc_add
@@ -1815,6 +1819,10 @@ id logout
 id mapview2
 id masked
 id media_actions
+id menu_home
+id menu_joined
+id menu_live
+id menu_myevents
 id message
 id middle
 id middle_section
@@ -1847,7 +1855,6 @@ id mtrl_picker_text_input_range_end
 id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id multiply
-id my_events
 id my_events_frag
 id myevents_wrapper
 id name
@@ -1999,8 +2006,6 @@ id transition_layout_save
 id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
-id trending_events
-id trending_frag
 id trending_img
 id trending_wrapper
 id typ
@@ -2109,6 +2114,7 @@ layout design_text_input_start_icon
 layout event_page
 layout expand_button
 layout feedback
+layout fragment_live_events
 layout gallery_image
 layout gallery_row
 layout help
@@ -2196,6 +2202,7 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 menu crop_image_menu
+menu nav_menu
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -2274,6 +2281,7 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string messages_header

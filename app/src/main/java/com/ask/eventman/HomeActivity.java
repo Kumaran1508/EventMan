@@ -1,60 +1,41 @@
 package com.ask.eventman;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.common.util.Hex;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.view.GravityCompat;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
-import android.graphics.drawable.ColorDrawable;
 import android.widget.LinearLayout;
-import android.app.*;
 import android.os.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
 import android.content.*;
 import android.graphics.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
-import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
 
-import java.io.File;
-import java.util.*;
-import java.text.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.content.Intent;
 import android.net.Uri;
-import java.util.Timer;
+
 import java.util.TimerTask;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.animation.ObjectAnimator;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.BounceInterpolator;
+
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
@@ -67,7 +48,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -75,19 +55,20 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.Calendar;
-import java.text.SimpleDateFormat;
+
 import android.view.View;
 import android.widget.AdapterView;
 import androidx.core.content.ContextCompat;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
-	
-	private Timer _timer = new Timer();
+
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	private StorageReference rootref = FirebaseStorage.getInstance().getReference();
 	
@@ -104,44 +85,14 @@ public class HomeActivity extends AppCompatActivity {
 	
 	private ArrayList<HashMap<String, Object>> map_list = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> filtered = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> Joined = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> i_joined = new ArrayList<>();
-	private ArrayList<String> joined_events_list = new ArrayList<>();
-	private ArrayList<String> dt_tym = new ArrayList<>();
-	private ArrayList<HashMap<String, Object>> live = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> userlist = new ArrayList<>();
-	
-	private LinearLayout container_home;
-	private LinearLayout page;
-	private LinearLayout bottom_nav;
-	private LinearLayout fragments_holder;
+
+
 	private LinearLayout home_frag;
-	private LinearLayout trending_frag;
-	private LinearLayout live_frag;
-	private LinearLayout joined_frag;
-	private LinearLayout my_events_frag;
 	private LinearLayout search_container;
-	private LinearLayout event_list_container;
 	private EditText event_search_text;
-	private LinearLayout search_wrapper;
 	private ImageView search_imgbtn;
 	private ListView event_list;
-	private ListView trending_events;
-	private ListView live_events;
-	private ListView joined_events;
-	private ListView my_events;
-	private LinearLayout home_wrapper;
-	private LinearLayout trending_wrapper;
-	private LinearLayout live_wrapper;
-	private LinearLayout upcoming_wrapper;
-	private LinearLayout myevents_wrapper;
-	private ImageView home_img;
-	private ImageView trending_img;
-	private ImageView live_img;
-	private ImageView joined_img;
-	private ImageView created_img;
-	private LinearLayout _drawer_drawer_container;
-	private LinearLayout _drawer_linear1;
 	private LinearLayout _drawer_settings;
 	private LinearLayout _drawer_feedback;
 	private LinearLayout _drawer_bug_report;
@@ -149,6 +100,8 @@ public class HomeActivity extends AppCompatActivity {
 	private LinearLayout _drawer_about;
 	private LinearLayout _drawer_logout;
 	private LinearLayout _drawer_linear3;
+	private BottomNavigationView bottomNavigationView;
+
 	private CircleImageView _drawer_user_ico;
 	private TextView _drawer_user;
 	private ImageView _drawer_imageview1;
@@ -190,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
 	private int endLimit=7;
 	private boolean isLoaded=Boolean.FALSE,isLoading=Boolean.FALSE;
 	private long evt_count=0;
+	private Fragment liveFrag = new LiveEvents();
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -197,11 +151,6 @@ public class HomeActivity extends AppCompatActivity {
 		setContentView(R.layout.home);
 		com.google.firebase.FirebaseApp.initializeApp(this);
 		initialize(_savedInstanceState);
-
-
-
-
-
 
 	}
 
@@ -299,38 +248,12 @@ public class HomeActivity extends AppCompatActivity {
 		_toggle.syncState();
 		
 		LinearLayout _nav_view = (LinearLayout) findViewById(R.id._nav_view);
-		
-		container_home = (LinearLayout) findViewById(R.id.container_home);
-		page = (LinearLayout) findViewById(R.id.page);
-		bottom_nav = (LinearLayout) findViewById(R.id.bottom_nav);
-		fragments_holder = (LinearLayout) findViewById(R.id.fragments_holder);
+		bottomNavigationView=findViewById(R.id.bottomNavigation);
 		home_frag = (LinearLayout) findViewById(R.id.home_frag);
-		trending_frag = (LinearLayout) findViewById(R.id.trending_frag);
-		live_frag = (LinearLayout) findViewById(R.id.live_frag);
-		joined_frag = (LinearLayout) findViewById(R.id.joined_frag);
-		my_events_frag = (LinearLayout) findViewById(R.id.my_events_frag);
 		search_container = (LinearLayout) findViewById(R.id.search_container);
-		event_list_container = (LinearLayout) findViewById(R.id.event_list_container);
 		event_search_text = (EditText) findViewById(R.id.event_search_text);
-		search_wrapper = (LinearLayout) findViewById(R.id.search_wrapper);
 		search_imgbtn = (ImageView) findViewById(R.id.search_imgbtn);
 		event_list = (ListView) findViewById(R.id.event_list);
-		trending_events = (ListView) findViewById(R.id.trending_events);
-		live_events = (ListView) findViewById(R.id.live_events);
-		joined_events = (ListView) findViewById(R.id.joined_events);
-		my_events = (ListView) findViewById(R.id.my_events);
-		home_wrapper = (LinearLayout) findViewById(R.id.home_wrapper);
-		trending_wrapper = (LinearLayout) findViewById(R.id.trending_wrapper);
-		live_wrapper = (LinearLayout) findViewById(R.id.live_wrapper);
-		upcoming_wrapper = (LinearLayout) findViewById(R.id.upcoming_wrapper);
-		myevents_wrapper = (LinearLayout) findViewById(R.id.myevents_wrapper);
-		home_img = (ImageView) findViewById(R.id.home_img);
-		trending_img = (ImageView) findViewById(R.id.trending_img);
-		live_img = (ImageView) findViewById(R.id.live_img);
-		joined_img = (ImageView) findViewById(R.id.joined_img);
-		created_img = (ImageView) findViewById(R.id.created_img);
-		_drawer_drawer_container = (LinearLayout) _nav_view.findViewById(R.id.drawer_container);
-		_drawer_linear1 = (LinearLayout) _nav_view.findViewById(R.id.linear1);
 		_drawer_settings = (LinearLayout) _nav_view.findViewById(R.id.settings);
 		_drawer_feedback = (LinearLayout) _nav_view.findViewById(R.id.feedback);
 		_drawer_bug_report = (LinearLayout) _nav_view.findViewById(R.id.bug_report);
@@ -368,6 +291,38 @@ public class HomeActivity extends AppCompatActivity {
 			_drawer_imageview6.setImageDrawable(getDrawable(R.drawable.ic_launch_white));
 		}
 
+
+		bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+				if(item.getItemId()==R.id.menu_home){
+					getSelection=0;
+					home_frag.setVisibility(View.VISIBLE);
+					setTitle("Home");
+					_fab.setVisibility(View.GONE);
+				}
+            	else if(item.getItemId()==R.id.menu_live){
+					getSelection=2;
+					home_frag.setVisibility(View.GONE);
+					getSupportFragmentManager().beginTransaction().replace(R.id.frameFragment,liveFrag).commit();
+					setTitle("Live");
+					_fab.setVisibility(View.GONE);
+				}
+            	else if(item.getItemId()==R.id.menu_joined){
+					getSelection=3;
+					home_frag.setVisibility(View.GONE);
+					setTitle("Joined Events");
+					_fab.setVisibility(View.GONE);
+				}
+            	else{
+					getSelection=4;
+					home_frag.setVisibility(View.GONE);
+					setTitle("My Events");
+					_fab.setVisibility(View.VISIBLE);
+				}
+            	return true;
+            }
+        });
 
 		event_list.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override
@@ -458,48 +413,19 @@ public class HomeActivity extends AppCompatActivity {
 				}
 				catch(Exception e)
 				{
-					SketchwareUtil.showMessage(getApplicationContext(), "Something wrong with the Event");
+					Toast.makeText(HomeActivity.this, "Something wrong with the Event", Toast.LENGTH_SHORT).show();
 				}
 				itnt.setClass(getApplicationContext(), EventPageActivity.class);
 				startActivity(itnt);
 			}
 		});
+
+
+
+
+
 		
-		trending_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
-				final int _position = _param3;
-				
-			}
-		});
-		
-		live_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
-				final int _position = _param3;
-				map = live.get((int)_position);
-				try {
-					itnt.putExtra("Title", map.get("Title").toString());
-					itnt.putExtra("Description", map.get("Description").toString());
-					itnt.putExtra("Type", map.get("Type").toString());
-					itnt.putExtra("Start Date", map.get("Start Date").toString());
-					itnt.putExtra("Start Time", map.get("Start Time").toString());
-					itnt.putExtra("End Date", map.get("End Date").toString());
-					itnt.putExtra("End Time", map.get("End Time").toString());
-					itnt.putExtra("Location", map.get("Location").toString());
-					itnt.putExtra("Latitude", map.get("Latitude").toString());
-					itnt.putExtra("Longitude", map.get("Longitude").toString());
-					itnt.setClass(getApplicationContext(), EventPageActivity.class);
-					startActivity(itnt);
-				}
-				catch(Exception e)
-				{
-					SketchwareUtil.showMessage(getApplicationContext(), "Something wrong with the Event");
-				}
-			}
-		});
-		
-		joined_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		/*joined_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 				final int _position = _param3;
@@ -552,124 +478,9 @@ public class HomeActivity extends AppCompatActivity {
 				itnt.setClass(getApplicationContext(), EventPageActivity.class);
 				startActivity(itnt);
 			}
-		});
+		});*/
 		
-		home_img.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				getSelection=0;
-				home_img.setImageResource(R.drawable.home_icon_1);
-				trending_img.setImageResource(R.drawable.trending_3);
-				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-					live_img.setImageResource(R.drawable.icon_2w);
-					joined_img.setImageResource(R.drawable.icon_5w);
-					created_img.setImageResource(R.drawable.icon_4w);
-				}
-				else {
-					live_img.setImageResource(R.drawable.icon_2);
-					joined_img.setImageResource(R.drawable.icon_5);
-					created_img.setImageResource(R.drawable.icon_4);
-				}
-				home_frag.setVisibility(View.VISIBLE);
-				setTitle("Home");
-				_fab.setVisibility(View.GONE);
-				getSelection = 0;
-			}
-		});
-		
-		trending_img.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				getSelection=1;
-				home_img.setImageResource(R.drawable.home_icon_2);
-				trending_img.setImageResource(R.drawable.trending_2);
-				live_img.setImageResource(R.drawable.icon_2);
-				joined_img.setImageResource(R.drawable.icon_5);
-				created_img.setImageResource(R.drawable.icon_4);
-				home_frag.setVisibility(View.GONE);
-				trending_frag.setVisibility(View.VISIBLE);
-				setTitle("Trending");
-				_fab.setVisibility(View.GONE);
-			}
-		});
-		
-		live_img.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				getSelection=2;
-				live_img.setImageResource(R.drawable.icon_1);
-				trending_img.setImageResource(R.drawable.trending_3);
-				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-					home_img.setImageResource(R.drawable.home_icon_2_w);
-					joined_img.setImageResource(R.drawable.icon_5w);
-					created_img.setImageResource(R.drawable.icon_4w);
-				}
-				else{
-					home_img.setImageResource(R.drawable.home_icon_2);
-					joined_img.setImageResource(R.drawable.icon_5);
-					created_img.setImageResource(R.drawable.icon_4);
-				}
-				home_frag.setVisibility(View.GONE);
-				trending_frag.setVisibility(View.GONE);
-				live_frag.setVisibility(View.VISIBLE);
-				setTitle("Live");
-				_fab.setVisibility(View.GONE);
-			}
-		});
-		
-		joined_img.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				getSelection=3;
-				joined_img.setImageResource(R.drawable.icon_6);
-				trending_img.setImageResource(R.drawable.trending_3);
-				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-					home_img.setImageResource(R.drawable.home_icon_2_w);
-					live_img.setImageResource(R.drawable.icon_2w);
-					created_img.setImageResource(R.drawable.icon_4w);
-				}
-				else{
-					home_img.setImageResource(R.drawable.home_icon_2);
-					live_img.setImageResource(R.drawable.icon_2);
-					created_img.setImageResource(R.drawable.icon_4);
-				}
-				home_frag.setVisibility(View.GONE);
-				trending_frag.setVisibility(View.GONE);
-				live_frag.setVisibility(View.GONE);
-				joined_frag.setVisibility(View.VISIBLE);
-				setTitle("Joined Events");
-				_fab.setVisibility(View.GONE);
-			}
-		});
-		
-		created_img.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				getSelection=4;
-				trending_img.setImageResource(R.drawable.trending_3);
-				created_img.setImageResource(R.drawable.icon_3);
-				if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-					home_img.setImageResource(R.drawable.home_icon_2_w);
-					live_img.setImageResource(R.drawable.icon_2w);
-					joined_img.setImageResource(R.drawable.icon_5w);
 
-				}
-				else{
-					home_img.setImageResource(R.drawable.home_icon_2);
-					live_img.setImageResource(R.drawable.icon_2);
-					joined_img.setImageResource(R.drawable.icon_5);
-
-				}
-				home_frag.setVisibility(View.GONE);
-				trending_frag.setVisibility(View.GONE);
-				live_frag.setVisibility(View.GONE);
-				joined_frag.setVisibility(View.GONE);
-				my_events.setVisibility(View.VISIBLE);
-				setTitle("My Events");
-				_fab.setVisibility(View.VISIBLE);
-			}
-		});
-		
 		_fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
@@ -678,45 +489,6 @@ public class HomeActivity extends AppCompatActivity {
 				finish();
 			}
 		});
-		
-		/*_dbase_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		dbase.addChildEventListener(_dbase_child_listener);*/
 		
 		_net_req_request_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -733,124 +505,7 @@ public class HomeActivity extends AppCompatActivity {
 				
 			}
 		};
-		
-		_dbase_user_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		dbase_user.addChildEventListener(_dbase_user_child_listener);
-		
-		_joined__child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		joined_.addChildEventListener(_joined__child_listener);
-		
-		_dbusers_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		dbusers.addChildEventListener(_dbusers_child_listener);
-		
+
 		_drawer_settings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
@@ -945,146 +600,11 @@ public class HomeActivity extends AppCompatActivity {
 
 	private void initializeLogic() {
 		setTitle("Home");
-		_CardView(R.color.colorBackground, 1, 20, bottom_nav);
-		//_CardView(getColor(R.color.colorBackground), 1, 10, page);
+		//CardView(getColor(R.color.colorBackground), 1, 10, page);
 
-
-
-
-
-		_RippleEffect("#2196f3", home_img);
-		_RippleEffect("#2196f3", trending_img);
-		_RippleEffect("#2196f3", live_img);
-		_RippleEffect("#2196f3", joined_img);
-		_RippleEffect("#2196f3", created_img);
 		_RippleEffect("#2196f3", search_imgbtn);
-		home_img.setImageResource(R.drawable.home_icon_1);
-		trending_wrapper.setVisibility(View.GONE);
 
 
-
-		/*dbase.addListenerForSingleValueEvent(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot _dataSnapshot) {
-				map_list = new ArrayList<>();
-
-				try {
-					GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-					for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-						HashMap<String, Object> _map = _data.getValue(_ind);
-						map_list.add(_map);
-					}
-				}
-				catch (Exception _e) {
-					_e.printStackTrace();
-				}
-				try{
-					event_list.setAdapter(new Event_listAdapter(map_list));
-					((BaseAdapter)event_list.getAdapter()).notifyDataSetChanged();
-				}
-				catch(Exception e){
-					SketchwareUtil.showMessage(getApplicationContext(), "Error loading Events!....");
-				}
-				
-				i = 0;
-				for(int _repeat43 = 0; _repeat43 < (int)(map_list.size()); _repeat43++) {
-					try{
-						if (map_list.get((int)i).get("Owner").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-							map = map_list.get((int)i);
-							filtered.add(map);
-						}
-					}
-					catch(Exception e){
-					}
-					i++;
-				}
-				try{
-					my_events.setAdapter(new My_eventsAdapter(filtered));
-					((BaseAdapter)my_events.getAdapter()).notifyDataSetChanged();
-				}
-				catch(Exception e)
-				{
-					SketchwareUtil.showMessage(getApplicationContext(), "Error loading my events!...");
-				}
-			}
-			@Override
-			public void onCancelled(DatabaseError _databaseError) {
-			}
-		});
-		joined_.addListenerForSingleValueEvent(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot _dataSnapshot) {
-				Joined = new ArrayList<>();
-				try {
-					GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-					for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-						HashMap<String, Object> _map = _data.getValue(_ind);
-						Joined.add(_map);
-					}
-				}
-				catch (Exception _e) {
-					_e.printStackTrace();
-				}
-				i = 0;
-				for(int _repeat85 = 0; _repeat85 < (int)(Joined.size()); _repeat85++) {
-					if (Joined.get((int)i).get("user").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-						joined_events_list.add(Joined.get((int)i).get("eventkey").toString());
-					}
-					i++;
-				}
-				dbase.addListenerForSingleValueEvent(new ValueEventListener() {
-					@Override
-					public void onDataChange(DataSnapshot _dataSnapshot) {
-						map_list = new ArrayList<>();
-						try {
-							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-								HashMap<String, Object> _map = _data.getValue(_ind);
-								map_list.add(_map);
-							}
-						}
-						catch (Exception _e) {
-							_e.printStackTrace();
-						}
-						j = 0;
-						for(int _repeat102 = 0; _repeat102 < (int)(map_list.size()); _repeat102++) {
-							if (joined_events_list.contains(map_list.get((int)j).get("key").toString())) {
-								map = map_list.get((int)j);
-								i_joined.add(map);
-							}
-							start.set(Calendar.DAY_OF_MONTH, (int)(Double.parseDouble(map_list.get((int)j).get("Start Date").toString().substring((int)(0), (int)(2)))));
-							start.set(Calendar.MONTH, (int)(Double.parseDouble(map_list.get((int)j).get("Start Date").toString().substring((int)(3), (int)(5))) - 1));
-							start.set(Calendar.YEAR, (int)(Double.parseDouble(map_list.get((int)j).get("Start Date").toString().substring((int)(6), (int)(10)))));
-							start.set(Calendar.HOUR, (int)(Double.parseDouble(map_list.get((int)j).get("Start Time").toString().substring((int)(0), (int)(2)))));
-							start.set(Calendar.MINUTE, (int)(Double.parseDouble(map_list.get((int)j).get("Start Time").toString().substring((int)(3), (int)(5)))));
-							end.set(Calendar.DAY_OF_MONTH, (int)(Double.parseDouble(map_list.get((int)j).get("End Date").toString().substring((int)(0), (int)(2)))));
-							end.set(Calendar.MONTH, (int)(Double.parseDouble(map_list.get((int)j).get("End Date").toString().substring((int)(3), (int)(5))) - 1));
-							end.set(Calendar.YEAR, (int)(Double.parseDouble(map_list.get((int)j).get("End Date").toString().substring((int)(6), (int)(10)))));
-							end.set(Calendar.HOUR, (int)(Double.parseDouble(map_list.get((int)j).get("End Time").toString().substring((int)(0), (int)(2)))));
-							end.set(Calendar.MINUTE, (int)(Double.parseDouble(map_list.get((int)j).get("End Time").toString().substring((int)(3), (int)(5)))));
-							cal = Calendar.getInstance();
-							substr = substr.concat(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(start.getTime()).concat(" ".concat(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(end.getTime()))));
-							if (((long)(cal.getTimeInMillis() - start.getTimeInMillis()) > 0) && ((long)(end.getTimeInMillis() - cal.getTimeInMillis()) > 0)) {
-								map = map_list.get((int)j);
-								live.add(map);
-							}
-							j++;
-						}
-						joined_events.setAdapter(new Joined_eventsAdapter(i_joined));
-						((BaseAdapter)joined_events.getAdapter()).notifyDataSetChanged();
-						live_events.setAdapter(new Live_eventsAdapter(live));
-						((BaseAdapter)live_events.getAdapter()).notifyDataSetChanged();
-						FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/abc.txt"), substr);
-					}
-					@Override
-					public void onCancelled(DatabaseError _databaseError) {
-					}
-				});
-			}
-			@Override
-			public void onCancelled(DatabaseError _databaseError) {
-			}
-		}); */
 		search_container.setVisibility(View.GONE);
 		_fab.setVisibility(View.GONE);
 	}
@@ -1127,18 +647,6 @@ public class HomeActivity extends AppCompatActivity {
 			_drawer_imageview5.setImageResource(R.drawable.help_icon_w);
 			_drawer_imageview2.setImageResource(R.drawable.about_us_w);
 			_drawer_imageview6.setImageResource(R.drawable.ic_launch_white);
-			if(getSelection!=0){
-				home_img.setImageResource(R.drawable.home_icon_2_w);
-			}
-			if(getSelection!=2){
-				live_img.setImageResource(R.drawable.icon_2w);
-			}
-			if(getSelection!=3){
-				joined_img.setImageResource(R.drawable.icon_5w);
-			}
-			if(getSelection!=4){
-				created_img.setImageResource(R.drawable.icon_4w);
-			}
 		}
 		else{
 
@@ -1148,18 +656,6 @@ public class HomeActivity extends AppCompatActivity {
 			_drawer_imageview5.setImageResource(R.drawable.help_icon);
 			_drawer_imageview2.setImageResource(R.drawable.about_us_icon);
 			_drawer_imageview6.setImageResource(R.drawable.ic_launch_black);
-			if(getSelection!=0){
-				home_img.setImageResource(R.drawable.home_icon_2);
-			}
-			if(getSelection!=2){
-				live_img.setImageResource(R.drawable.icon_2);
-			}
-			if(getSelection!=3){
-				joined_img.setImageResource(R.drawable.icon_5);
-			}
-			if(getSelection!=4){
-				created_img.setImageResource(R.drawable.icon_4);
-			}
 		}
 		
 	}
@@ -1227,7 +723,7 @@ public class HomeActivity extends AppCompatActivity {
 
 	}
 
-	private void _CardView (final int _color, final double _radius, final double _shadow, final View _view) {
+	private void CardView (final int _color, final double _radius, final double _shadow, final View _view) {
 		android.graphics.drawable.GradientDrawable gd = new android.graphics.drawable.GradientDrawable();
 		gd.setColor(_color);
 		gd.setCornerRadius((int)_radius);
@@ -1272,20 +768,20 @@ public class HomeActivity extends AppCompatActivity {
 		@Override
 		public View getView(final int _position, View _view, ViewGroup _viewGroup) {
 			LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _v = _view;
-			if (_v == null) {
-				_v = _inflater.inflate(R.layout.list_element, null);
+			View v = _view;
+			if (v == null) {
+				v = _inflater.inflate(R.layout.list_element, null);
 			}
 			
-			final LinearLayout elmnt_container = (LinearLayout) _v.findViewById(R.id.elmnt_container);
-			final ImageView event_dp = (ImageView) _v.findViewById(R.id.event_dp);
-			final LinearLayout evt_title_cont = (LinearLayout) _v.findViewById(R.id.evt_title_cont);
-			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
-			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
-			final TextView location = (TextView) _v.findViewById(R.id.location);
-			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
-			final TextView date = (TextView) _v.findViewById(R.id.date);
-			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
+			final LinearLayout elmnt_container = (LinearLayout) v.findViewById(R.id.elmnt_container);
+			final ImageView event_dp = (ImageView) v.findViewById(R.id.event_dp);
+			final LinearLayout evt_title_cont = (LinearLayout) v.findViewById(R.id.evt_title_cont);
+			final LinearLayout linear5 = (LinearLayout) v.findViewById(R.id.linear5);
+			final TextView event_title = (TextView) v.findViewById(R.id.event_title);
+			final TextView location = (TextView) v.findViewById(R.id.location);
+			//final ImageView imageview2 = (ImageView) v.findViewById(R.id.imageview2);
+			final TextView date = (TextView) v.findViewById(R.id.date);
+			final TextView mthyr = (TextView) v.findViewById(R.id.mthyr);
 			
 
 
@@ -1312,314 +808,12 @@ public class HomeActivity extends AppCompatActivity {
 			}
 			catch(Exception e)
 			{
-				SketchwareUtil.showMessage(getApplicationContext(), "Unable to set data to event list item");
+				Toast.makeText(HomeActivity.this, "Unable to set data to event list item", Toast.LENGTH_SHORT).show();
 			}
 			
-			return _v;
+			return v;
 		}
 	}
-	
-	public class Trending_eventsAdapter extends BaseAdapter {
-		ArrayList<HashMap<String, Object>> _data;
-		public Trending_eventsAdapter(ArrayList<HashMap<String, Object>> _arr) {
-			_data = _arr;
-		}
-		
-		@Override
-		public int getCount() {
-			return _data.size();
-		}
-		
-		@Override
-		public HashMap<String, Object> getItem(int _index) {
-			return _data.get(_index);
-		}
-		
-		@Override
-		public long getItemId(int _index) {
-			return _index;
-		}
-		@Override
-		public View getView(final int _position, View _view, ViewGroup _viewGroup) {
-			LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _v = _view;
-			if (_v == null) {
-				_v = _inflater.inflate(R.layout.list_element, null);
-			}
-			
-			final LinearLayout elmnt_container = (LinearLayout) _v.findViewById(R.id.elmnt_container);
-			final ImageView event_dp = (ImageView) _v.findViewById(R.id.event_dp);
-			final LinearLayout evt_title_cont = (LinearLayout) _v.findViewById(R.id.evt_title_cont);
-			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
-			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
-			final TextView location = (TextView) _v.findViewById(R.id.location);
-			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
-			
 
-			event_dp.setImageResource(R.drawable.bg_img_2);
-			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
-			try{
-				event_title.setText(_data.get((int)_position).get("Title").toString());
-				location.setText(_data.get((int)_position).get("Type").toString());
-			}
-			catch(Exception e)
-			{
-				SketchwareUtil.showMessage(getApplicationContext(), "Unable to set data to event list item");
-			}
-			
-			return _v;
-		}
-	}
-	
-	public class Live_eventsAdapter extends BaseAdapter {
-		ArrayList<HashMap<String, Object>> _data;
-		public Live_eventsAdapter(ArrayList<HashMap<String, Object>> _arr) {
-			_data = _arr;
-		}
-		
-		@Override
-		public int getCount() {
-			return _data.size();
-		}
-		
-		@Override
-		public HashMap<String, Object> getItem(int _index) {
-			return _data.get(_index);
-		}
-		
-		@Override
-		public long getItemId(int _index) {
-			return _index;
-		}
-		@Override
-		public View getView(final int _position, View _view, ViewGroup _viewGroup) {
-			LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _v = _view;
-			if (_v == null) {
-				_v = _inflater.inflate(R.layout.list_element, null);
-			}
-			
-			final LinearLayout elmnt_container = (LinearLayout) _v.findViewById(R.id.elmnt_container);
-			final ImageView event_dp = (ImageView) _v.findViewById(R.id.event_dp);
-			final LinearLayout evt_title_cont = (LinearLayout) _v.findViewById(R.id.evt_title_cont);
-			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
-			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
-			final TextView location = (TextView) _v.findViewById(R.id.location);
-			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
-			final TextView date = (TextView) _v.findViewById(R.id.date);
-			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
-			
-
-			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
-			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-				@Override
-				public void onSuccess(Uri uri) {
-					Glide.with(HomeActivity.this)
-							.load(uri)
-							.placeholder(R.drawable.app_icon)
-							.into(event_dp);
-				}
-			});
-			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
-			try{
-				event_title.setText(_data.get((int)_position).get("Title").toString());
-				location.setText(_data.get((int)_position).get("Owner").toString());
-				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
-				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
-			}
-			catch(Exception e)
-			{
-				SketchwareUtil.showMessage(getApplicationContext(), "Unable to set data to event list item");
-			}
-			
-			return _v;
-		}
-	}
-	
-	public class Joined_eventsAdapter extends BaseAdapter {
-		ArrayList<HashMap<String, Object>> _data;
-		//Context context;
-		public Joined_eventsAdapter(ArrayList<HashMap<String, Object>> _arr) {
-			//this.context=context;
-			_data = _arr;
-		}
-		
-		@Override
-		public int getCount() {
-			return _data.size();
-		}
-		
-		@Override
-		public HashMap<String, Object> getItem(int _index) {
-			return _data.get(_index);
-		}
-		
-		@Override
-		public long getItemId(int _index) {
-			return _index;
-		}
-		@Override
-		public View getView(final int _position, View _view, ViewGroup _viewGroup) {
-			LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _v = _view;
-			if (_v == null) {
-				_v = _inflater.inflate(R.layout.list_element, null);
-			}
-			
-			final LinearLayout elmnt_container = (LinearLayout) _v.findViewById(R.id.elmnt_container);
-			final ImageView event_dp = (ImageView) _v.findViewById(R.id.event_dp);
-			final LinearLayout evt_title_cont = (LinearLayout) _v.findViewById(R.id.evt_title_cont);
-			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
-			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
-			final TextView location = (TextView) _v.findViewById(R.id.location);
-			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
-			final TextView date = (TextView) _v.findViewById(R.id.date);
-			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
-			
-
-			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
-			FirebaseStorage.getInstance().getReference().child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-				@Override
-				public void onSuccess(Uri uri) {
-					Glide.with(HomeActivity.this)
-							.load(uri)
-							.placeholder(R.drawable.app_icon)
-							.into(event_dp);
-				}
-			});
-			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
-			try{
-				event_title.setText(_data.get((int)_position).get("Title").toString());
-				location.setText(_data.get((int)_position).get("Owner").toString());
-				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
-				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
-
-			}
-			catch(Exception e)
-			{
-				SketchwareUtil.showMessage(getApplicationContext(), "Unable to set data to event list item");
-			}
-			
-			return _v;
-		}
-	}
-	
-	public class My_eventsAdapter extends BaseAdapter {
-		ArrayList<HashMap<String, Object>> _data;
-		public My_eventsAdapter(ArrayList<HashMap<String, Object>> _arr) {
-			_data = _arr;
-		}
-		
-		@Override
-		public int getCount() {
-			return _data.size();
-		}
-		
-		@Override
-		public HashMap<String, Object> getItem(int _index) {
-			return _data.get(_index);
-		}
-		
-		@Override
-		public long getItemId(int _index) {
-			return _index;
-		}
-		@Override
-		public View getView(final int _position, View _view, ViewGroup _viewGroup) {
-			LayoutInflater _inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View _v = _view;
-			if (_v == null) {
-				_v = _inflater.inflate(R.layout.list_element, null);
-			}
-			
-			final LinearLayout elmnt_container = (LinearLayout) _v.findViewById(R.id.elmnt_container);
-			final ImageView event_dp = (ImageView) _v.findViewById(R.id.event_dp);
-			final LinearLayout evt_title_cont = (LinearLayout) _v.findViewById(R.id.evt_title_cont);
-			final LinearLayout linear5 = (LinearLayout) _v.findViewById(R.id.linear5);
-			final TextView event_title = (TextView) _v.findViewById(R.id.event_title);
-			final TextView location = (TextView) _v.findViewById(R.id.location);
-			//final ImageView imageview2 = (ImageView) _v.findViewById(R.id.imageview2);
-			final TextView date = (TextView) _v.findViewById(R.id.date);
-			final TextView mthyr = (TextView) _v.findViewById(R.id.mthyr);
-			
-
-			event_dp.setImageDrawable(getDrawable(R.drawable.bg_img_2));
-			rootref.child("events/"+_data.get((int)_position).get("Title").toString()+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-				@Override
-				public void onSuccess(Uri uri) {
-					Glide.with(HomeActivity.this)
-							.load(uri)
-							.placeholder(R.drawable.app_icon)
-							.into(event_dp);
-				}
-			});
-
-			//imageview2.setImageResource(R.drawable.ic_bookmark_black);
-			try{
-				event_title.setText(_data.get((int)_position).get("Title").toString());
-				location.setText(_data.get((int)_position).get("Type").toString());
-				date.setText(_data.get((int)_position).get("Start Date").toString().substring(0,2));
-				mthyr.setText(_data.get((int)_position).get("Start Date").toString().substring(3,5)+" "+_data.get((int)_position).get("Start Date").toString().substring(6,10));
-
-			}
-			catch(Exception e)
-			{
-				SketchwareUtil.showMessage(getApplicationContext(), "Unable to set data to event list item");
-			}
-			
-			return _v;
-		}
-	}
-	
-	@Deprecated
-	public void showMessage(String _s) {
-		Toast.makeText(getApplicationContext(), _s, Toast.LENGTH_SHORT).show();
-	}
-	
-	@Deprecated
-	public int getLocationX(View _v) {
-		int _location[] = new int[2];
-		_v.getLocationInWindow(_location);
-		return _location[0];
-	}
-	
-	@Deprecated
-	public int getLocationY(View _v) {
-		int _location[] = new int[2];
-		_v.getLocationInWindow(_location);
-		return _location[1];
-	}
-	
-	@Deprecated
-	public int getRandom(int _min, int _max) {
-		Random random = new Random();
-		return random.nextInt(_max - _min + 1) + _min;
-	}
-	
-	@Deprecated
-	public ArrayList<Double> getCheckedItemPositionsToArray(ListView _list) {
-		ArrayList<Double> _result = new ArrayList<Double>();
-		SparseBooleanArray _arr = _list.getCheckedItemPositions();
-		for (int _iIdx = 0; _iIdx < _arr.size(); _iIdx++) {
-			if (_arr.valueAt(_iIdx))
-			_result.add((double)_arr.keyAt(_iIdx));
-		}
-		return _result;
-	}
-	
-	@Deprecated
-	public float getDip(int _input){
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, _input, getResources().getDisplayMetrics());
-	}
-	
-	@Deprecated
-	public int getDisplayWidthPixels(){
-		return getResources().getDisplayMetrics().widthPixels;
-	}
-	
-	@Deprecated
-	public int getDisplayHeightPixels(){
-		return getResources().getDisplayMetrics().heightPixels;
-	}
 	
 }

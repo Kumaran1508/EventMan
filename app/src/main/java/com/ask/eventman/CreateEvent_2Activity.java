@@ -75,6 +75,7 @@ public class CreateEvent_2Activity extends AppCompatActivity implements OnMapRea
 	private Button button2;
 	
 	private DatabaseReference dbase = _firebase.getReference("/events");
+	private DatabaseReference created = _firebase.getReference("/created"+FirebaseAuth.getInstance().getCurrentUser().getEmail());
 	private ChildEventListener _dbase_child_listener;
 	private Intent itnt = new Intent();
 	private FirebaseAuth dbauth;
@@ -131,6 +132,12 @@ public class CreateEvent_2Activity extends AppCompatActivity implements OnMapRea
 				isEventCreated = true;
 				map.put("key", dbase.push().getKey());
 				dbase.child(map.get("key").toString()).updateChildren(map);
+
+				HashMap<String,Object> cmap = new HashMap<>();
+				cmap.put("key",created.push().getKey());
+				cmap.put("eventkey",map.get("key").toString());
+				created.child(cmap.get("key").toString()).updateChildren(cmap);
+
 				itnt.setClass(getApplicationContext(), HomeActivity.class);
 				startActivity(itnt);
 				try {

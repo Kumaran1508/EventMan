@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/#Data Files-Event_Man.iml" filepath="$PROJECT_DIR$/#Data Files-Event_Man.iml" group="Event_Man" />
       <module fileurl="file://$PROJECT_DIR$/Event_Man.iml" filepath="$PROJECT_DIR$/Event_Man.iml" group="Event_Man" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Event_Man/app" />
     </modules>

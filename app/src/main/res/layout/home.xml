@@ -20,223 +20,124 @@
 				android:background="?attr/colorPrimary"
 				app:popupTheme="@style/AppTheme.PopupOverlay"/>
 		</com.google.android.material.appbar.AppBarLayout>
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical"
-			app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="@color/colorBackground">
-			<LinearLayout
-				android:id="@+id/container_home"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:gravity="bottom"
-				android:orientation="vertical"
-                android:background="@color/colorBackground">
-				<LinearLayout
-					android:id="@+id/page"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:padding="1dp"
-					android:gravity="bottom"
-					android:orientation="vertical"
-					android:layout_weight="80">
-					<LinearLayout
-						android:id="@+id/fragments_holder"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:orientation="horizontal">
-						<LinearLayout
-							android:id="@+id/home_frag"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:orientation="vertical"
-							android:background="@color/colorBackground">
-							<LinearLayout
-								android:id="@+id/search_container"
-								android:layout_width="match_parent"
-								android:layout_height="50dp"
-								android:gravity="center_vertical"
-								android:orientation="horizontal">
-								<EditText
-									android:id="@+id/event_search_text"
-									android:layout_width="match_parent"
-									android:layout_height="wrap_content"
-									android:padding="8dp"
-									android:textSize="12sp"
-									android:textColor="#000000"
-									android:hint="Search Events"
-									android:textColorHint="#607D8B"
-									android:layout_weight="1"/>
-								<LinearLayout
-									android:id="@+id/search_wrapper"
-									android:layout_width="60dp"
-									android:layout_height="match_parent"
-									android:padding="8dp"
-									android:orientation="vertical"
-									android:weightSum="1">
-									<ImageView
-										android:id="@+id/search_imgbtn"
-										android:layout_width="match_parent"
-										android:layout_height="match_parent"
-										android:padding="2dp"
-										android:src="@drawable/search_ico"
-										android:scaleType="centerInside"
-										android:layout_weight="1"/>
-								</LinearLayout>
-							</LinearLayout>
-							<LinearLayout
-								android:id="@+id/event_list_container"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:orientation="vertical"
-								android:background="@color/colorBackground">
-								<ListView
-									android:id="@+id/event_list"
-									android:layout_width="match_parent"
-									android:layout_height="match_parent"
-									android:choiceMode="none"
-									android:background="@color/colorBackground"/>
-							</LinearLayout>
-						</LinearLayout>
-						<LinearLayout
-							android:id="@+id/trending_frag"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:orientation="vertical">
-							<ListView
-								android:id="@+id/trending_events"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:choiceMode="none"/>
-						</LinearLayout>
-						<LinearLayout
-							android:id="@+id/live_frag"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:orientation="vertical">
-							<ListView
-								android:id="@+id/live_events"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:choiceMode="none"/>
-						</LinearLayout>
-						<LinearLayout
-							android:id="@+id/joined_frag"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:orientation="vertical">
-							<ListView
-								android:id="@+id/joined_events"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:choiceMode="none"/>
-						</LinearLayout>
-						<LinearLayout
-							android:id="@+id/my_events_frag"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:orientation="vertical">
-							<ListView
-								android:id="@+id/my_events"
-								android:layout_width="match_parent"
-								android:layout_height="match_parent"
-								android:choiceMode="none"/>
-						</LinearLayout>
-					</LinearLayout>
-				</LinearLayout>
-				<LinearLayout
-					android:id="@+id/bottom_nav"
-					android:layout_width="match_parent"
-					android:layout_height="60dp"
-					android:orientation="horizontal"
-                    android:background="#6A6A6A"
-                    android:paddingTop="1dp">
-					<LinearLayout
-						android:id="@+id/home_wrapper"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:padding="8dp"
-						android:gravity="center_horizontal|center_vertical"
-						android:orientation="vertical"
-						android:layout_weight="1"
-                        android:background="@color/colorBackground">
-						<ImageView
-							android:id="@+id/home_img"
-							android:layout_width="40dp"
-							android:layout_height="40dp"
-							android:layout_marginTop="3dp"
-							android:src="@drawable/home_icon_2"
-							android:scaleType="fitCenter"
-							android:layout_gravity="center_horizontal|center_vertical"/>
-					</LinearLayout>
-					<LinearLayout
-						android:id="@+id/trending_wrapper"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:padding="8dp"
-						android:gravity="center_horizontal|center_vertical"
-						android:orientation="vertical"
-						android:layout_weight="1"
-                        android:background="@color/colorBackground">
-						<ImageView
-							android:id="@+id/trending_img"
-							android:layout_width="40dp"
-							android:layout_height="40dp"
-							android:src="@drawable/trending_3"
-							android:scaleType="fitCenter"/>
-					</LinearLayout>
-					<LinearLayout
-						android:id="@+id/live_wrapper"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:padding="8dp"
-						android:gravity="center_horizontal|center_vertical"
-						android:orientation="vertical"
-						android:layout_weight="1"
-                        android:background="@color/colorBackground">
-						<ImageView
-							android:id="@+id/live_img"
-							android:layout_width="40dp"
-							android:layout_height="40dp"
-							android:src="@drawable/icon_2"
-							android:scaleType="fitCenter"/>
-					</LinearLayout>
-					<LinearLayout
-						android:id="@+id/upcoming_wrapper"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:padding="8dp"
-						android:gravity="center_horizontal|center_vertical"
-						android:orientation="vertical"
-						android:layout_weight="1"
-                        android:background="@color/colorBackground">
-						<ImageView
-							android:id="@+id/joined_img"
-							android:layout_width="40dp"
-							android:layout_height="40dp"
-							android:src="@drawable/icon_5"
-							android:scaleType="fitCenter"/>
-					</LinearLayout>
-					<LinearLayout
-						android:id="@+id/myevents_wrapper"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:padding="8dp"
-						android:gravity="center_horizontal|center_vertical"
-						android:orientation="vertical"
-						android:layout_weight="1"
-                        android:background="@color/colorBackground">
-						<ImageView
-							android:id="@+id/created_img"
-							android:layout_width="40dp"
-							android:layout_height="40dp"
-							android:src="@drawable/icon_4"
-							android:scaleType="fitCenter"/>
-					</LinearLayout>
-				</LinearLayout>
-			</LinearLayout>
-		</LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/container_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/page"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="1dp">
+
+                    <LinearLayout
+                        android:id="@+id/fragments_holder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/home_frag"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorBackground"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/search_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <EditText
+                                    android:id="@+id/event_search_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:hint="Search Events"
+                                    android:padding="8dp"
+                                    android:textColor="#000000"
+                                    android:textColorHint="#607D8B"
+                                    android:textSize="12sp" />
+
+                                <LinearLayout
+                                    android:id="@+id/search_wrapper"
+                                    android:layout_width="60dp"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:padding="8dp"
+                                    android:weightSum="1">
+
+                                    <ImageView
+                                        android:id="@+id/search_imgbtn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:padding="2dp"
+                                        android:scaleType="centerInside"
+                                        android:src="@drawable/search_ico" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/event_list_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBackground"
+                                android:orientation="vertical">
+
+                                <ListView
+                                    android:id="@+id/event_list"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorBackground"
+                                    android:choiceMode="none"
+                                    app:layout_anchor="@+id/linearLayout"
+                                    app:layout_anchorGravity="center" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorBackground"
+                            android:id="@+id/frameFragment"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:id="@+id/bottomNavigation"
+                    android:layout_alignParentBottom="true"
+                    app:menu="@menu/nav_menu"
+                    app:itemIconTint="@drawable/selector"
+                    android:background="@drawable/nav_bg"
+                    app:itemIconSize="40dp"
+                    app:itemRippleColor="@color/colorPrimary"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
 		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:id="@+id/_fab"
 			android:layout_width="wrap_content"
@@ -246,13 +147,13 @@
 			app:srcCompat="@drawable/ic_add_white"
 			android:translationX="-10.0dp"
 			android:translationY="-70.0dp"/>
-	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 	<LinearLayout
 		android:id="@+id/_nav_view"
 		android:layout_width="320dp"
 		android:layout_height="match_parent"
 		android:layout_gravity="start"
 		android:background="#EEEEEE">
-		<include	layout="@layout/_drawer_home"/>
+        <include	layout="@layout/_drawer_home"/>
 	</LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

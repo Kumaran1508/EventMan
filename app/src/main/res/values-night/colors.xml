@@ -6,4 +6,5 @@
 	<color	name="colorControlNormal">#57BEEE</color>
 	<color  name="colorBackground">#292929</color>
 	<color name="colorText">#ffffff</color>
+	<color name="backgroundinvert">#ffffff</color>
 </resources>

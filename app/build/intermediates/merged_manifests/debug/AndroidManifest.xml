@@ -24,6 +24,7 @@
         android:icon="@drawable/app_icon"
         android:label="Event Man"
         android:largeHeap="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.ask.eventman.SettingsActivity"

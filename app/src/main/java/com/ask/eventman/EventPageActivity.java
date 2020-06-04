@@ -86,7 +86,7 @@ public class EventPageActivity extends AppCompatActivity {
 
 	private DatabaseReference dbase = _firebase.getReference("/events");
 	private DatabaseReference dbusers = _firebase.getReference("/users");
-	private DatabaseReference joined = _firebase.getReference("/joined");
+	private DatabaseReference joined;
 	
 	private Toolbar _toolbar;
 
@@ -232,6 +232,13 @@ public class EventPageActivity extends AppCompatActivity {
 		recyclerView.setAdapter(recyclerViewAdapter);
 		recyclerView.setHasFixedSize(true);
 
+		try {
+			_firebase.getReference("/joined/"+FirebaseAuth.getInstance().getCurrentUser().getEmail());
+		}
+		catch (Exception e){
+
+		}
+
 
 
 		storageRef.child("events/"+getIntent().getStringExtra("Title")+"/icon.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -250,7 +257,6 @@ public class EventPageActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View _view) {
 				if (join_btn.getText().toString().equals("JOIN")) {
-					mapJoined.put("user", FirebaseAuth.getInstance().getCurrentUser().getEmail());
 					mapJoined.put("eventkey", getIntent().getStringExtra("eventkey"));
 					mapJoined.put("key", joined.push().getKey());
 					joined.child(mapJoined.get("key").toString()).updateChildren(mapJoined);
@@ -292,154 +298,11 @@ public class EventPageActivity extends AppCompatActivity {
 			public void onClick(View _view) {
 				startActivityForResult(img_picker, REQ_CD_IMG_PICKER);
 
-				for(int i=0;i<_filePath.size();i++){
-                }
 
 			}
 		});
 		
-		_dbase_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		dbase.addChildEventListener(_dbase_child_listener);
-		
-		_dbusers_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
 
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		dbusers.addChildEventListener(_dbusers_child_listener);
-		
-		_joined_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		joined.addChildEventListener(_joined_child_listener);
-		
-		_dbauth_create_user_listener = new OnCompleteListener<AuthResult>() {
-			@Override
-			public void onComplete(Task<AuthResult> _param1) {
-				final boolean _success = _param1.isSuccessful();
-				final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-				
-			}
-		};
-		
-		_dbauth_sign_in_listener = new OnCompleteListener<AuthResult>() {
-			@Override
-			public void onComplete(Task<AuthResult> _param1) {
-				final boolean _success = _param1.isSuccessful();
-				final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-				
-			}
-		};
-		
-		_dbauth_reset_password_listener = new OnCompleteListener<Void>() {
-			@Override
-			public void onComplete(Task<Void> _param1) {
-				final boolean _success = _param1.isSuccessful();
-				
-			}
-		};
 
 		storageRef.child("events/"+ getIntent().getStringExtra("Title") +"/").listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
 			@Override
